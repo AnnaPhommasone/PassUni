@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <EditText
+        android:id="@+id/et_unit_code"
+        android:layout_width="90dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="16dp"
+        android:hint="@string/unit_code"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toStartOf="@+id/et_credit_points"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/et_credit_points"
+        android:layout_width="114dp"
+        android:layout_height="45dp"
+        android:layout_marginEnd="8dp"
+        android:hint="@string/credit_points"
+        android:inputType="number"
+        app:layout_constraintBaseline_toBaselineOf="@+id/et_unit_code"
+        app:layout_constraintEnd_toStartOf="@+id/et_mark" />
+
+    <EditText
+        android:id="@+id/et_mark"
+        android:layout_width="50dp"
+        android:layout_height="45dp"
+        android:layout_marginEnd="16dp"
+        android:hint="@string/mark"
+        android:inputType="number"
+        app:layout_constraintBaseline_toBaselineOf="@+id/et_credit_points"
+        app:layout_constraintEnd_toStartOf="@+id/btn_add_unit" />
+
+    <Button
+        android:id="@+id/btn_add_unit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:text="@string/add_unit"
+        app:layout_constraintBaseline_toBaselineOf="@+id/et_mark"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_view"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="70dp"
+        android:layout_marginBottom="50dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <Button
+        android:id="@+id/btn_calculate_wam"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:text="@string/calculate_wam"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/guideline2"
+        app:layout_constraintHorizontal_bias="0.484"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/recycler_view" />
+
+    <TextView
+        android:id="@+id/tv_wam"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:textColor="@android:color/black"
+        android:textSize="30sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/btn_calculate_wam"
+        app:layout_constraintTop_toBottomOf="@+id/recycler_view" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.5" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
