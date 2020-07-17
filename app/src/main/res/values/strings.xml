@@ -1,3 +1,25 @@
 <resources>
     <string name="app_name">PsGetDegrees</string>
+    <string name="unit_code">Unit Code</string>
+    <string name="unit_name">Unit Name</string>
+    <string name="calculate_wam">Calculate WAM</string>
+    <string name="credit_points">Credit Points</string>
+    <string name="mark">Mark</string>
+    <string name="unit_marks">Unit Marks</string>
+    <string name="navigation_drawer_open" />
+    <string name="navigation_drawer_close" />
+    <string name="tab_text_1">WAM</string>
+    <string name="tab_text_2">Unit Mark</string>
+    <string name="tab_text_3">Saved Marks</string>
+    <string name="add_unit">Add Unit</string>
+    <string name="assessment_name">Assessment Name</string>
+    <string name="value">Value</string>
+    <string name="mark_percent">Mark (%)</string>
+    <string name="add_assessment">Add Assessment</string>
+    <string name="calculate_unit_mark">Calculate Unit Mark</string>
+    <string name="save_unit_mark">Save Unit Mark</string>
+    <string name="delete_all_units">Delete All Units</string>
+    <string name="delete_assessments">Delete Assessments</string>
+    <string name="delete_marks">Delete Marks</string>
+
 </resources>
