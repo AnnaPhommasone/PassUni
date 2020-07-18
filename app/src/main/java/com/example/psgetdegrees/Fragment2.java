@@ -168,7 +168,7 @@ public class Fragment2 extends Fragment implements DeleteListener {
     public void onClickDel(int id) {
         assessmentViewModel.deleteAssessment(id);
         recyclerAdapter.notifyDataSetChanged();
-        Toast.makeText(getActivity(), "Unit Deleted", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getActivity(), "Assessment Deleted", Toast.LENGTH_SHORT).show();
     }
 
     // Uses the background thread to retrieve the given assessment details,
