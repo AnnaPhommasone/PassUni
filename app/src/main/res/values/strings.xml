@@ -21,5 +21,8 @@
     <string name="delete_all_units">Delete All Units</string>
     <string name="delete_assessments">Delete Assessments</string>
     <string name="delete_marks">Delete Marks</string>
+    <string name="unit_name_code_optional">Unit Name/Code (optional)</string>
+    <string name="level_1_unit">Level 1 Unit</string>
+    <string name="level_2_plus_unit">Level 2+ Unit</string>
 
 </resources>
