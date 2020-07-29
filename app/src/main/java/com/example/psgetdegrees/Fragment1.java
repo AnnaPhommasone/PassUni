@@ -6,6 +6,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -34,7 +35,7 @@ import java.util.List;
  * A fragment for the first tab. It calculates a WAM (weighted average mark) based on the
  * given units from the user.
  */
-public class Fragment1 extends Fragment implements DeleteListener {
+public class Fragment1 extends Fragment implements DeleteListener, UnitDialog.UnitDialogListener {
 
     private RecyclerView recyclerView;
     private UnitRecyclerAdapter recyclerAdapter;
@@ -100,6 +101,27 @@ public class Fragment1 extends Fragment implements DeleteListener {
             }
         });
         tvWam = view.findViewById(R.id.tv_wam);
+    }
+
+    @Override
+    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
+        inflater.inflate(R.menu.wam_options_menu, menu);
+        super.onCreateOptionsMenu(menu, inflater);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_del_units:
+                unitViewModel.deleteAll();
+                return true;
+            case R.id.action_add_unit:
+                openDialog();
+                return true;
+            case R.id.action_info_wam:
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     // Adds the new Unit to the units database.
@@ -172,26 +194,25 @@ public class Fragment1 extends Fragment implements DeleteListener {
         return isValidInt;
     }
 
-    @Override
-    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
-        inflater.inflate(R.menu.wam_options_menu, menu);
-        super.onCreateOptionsMenu(menu, inflater);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        if (item.getItemId() == R.id.action_del_units) {
-            unitViewModel.deleteAll();
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
-
     // Deletes the Unit identified by the given unique ID
     public void onClickDel(int id) {
         unitViewModel.deleteById(id);
         recyclerAdapter.notifyDataSetChanged();
         Toast.makeText(getActivity(), "Unit Deleted", Toast.LENGTH_SHORT).show();
+    }
+
+    private void openDialog() {
+        UnitDialog unitDialog = new UnitDialog();
+        unitDialog.setTargetFragment(Fragment1.this, 1);
+        unitDialog.show(getActivity().getSupportFragmentManager(), "UnitDialog");
+    }
+
+    @Override
+    public void addUnit(String unitName, String yearLevel, String creditPoints, String mark) {
+        if (unitName.length() == 0) {
+            unitName = "Unit " + recyclerAdapter.getItemCount() + 1;
+        }
+        Toast.makeText(getActivity(), unitName + " Added", Toast.LENGTH_SHORT).show();
     }
 
     // Uses the background thread to retrieve the Unit details from the units database,
