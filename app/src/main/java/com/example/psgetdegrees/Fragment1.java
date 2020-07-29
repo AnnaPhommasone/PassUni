@@ -125,12 +125,9 @@ public class Fragment1 extends Fragment implements DeleteListener, UnitDialog.Un
     }
 
     // Adds the new Unit to the units database.
-    private void addUnit(String unitCode, String creditPoints, String mark) {
-        if (unitDetailsCorrect(unitCode, creditPoints, mark)) {
-            // Converts the faculty code of unit code to uppercase for better presentation
-            String facultyCode = unitCode.substring(0, 3).toUpperCase();
-            String code = facultyCode + unitCode.substring(3, 7);
-            Unit newUnit = new Unit(code, creditPoints, mark);
+    private void addUnit(String unitName, String creditPoints, String mark) {
+        if (unitDetailsCorrect(creditPoints, mark)) {
+            Unit newUnit = new Unit(unitName, creditPoints, mark);
             unitViewModel.insert(newUnit);
             Toast.makeText(getActivity(), "Unit Added", Toast.LENGTH_SHORT).show();
         }
@@ -146,26 +143,17 @@ public class Fragment1 extends Fragment implements DeleteListener, UnitDialog.Un
 
     // Checks if the given unit details (unit code, credit points, and mark)
     // satisfy conditions.
-    private boolean unitDetailsCorrect(String unitCode, String creditPoints, String mark) {
-        // Check that credit points and mark fields not empty
-        if (unitCode.length() == 0 || creditPoints.length() == 0 || mark.length() == 0) {
-            Toast.makeText(getActivity(), "All Fields Are Required", Toast.LENGTH_LONG).show();
+    private boolean unitDetailsCorrect(String creditPoints, String mark) {
+        if (creditPoints.length() == 0) {
+            Toast.makeText(getActivity(), "Credit Points Required", Toast.LENGTH_LONG).show();
             return false;
         }
-        // Check if unit code has correct form (e.g. ABC1234)
-        if (unitCode.length() != 7) {
-            Toast.makeText(getActivity(), "Unit Code Is Not 7 Characters", Toast.LENGTH_LONG).show();
+        if (mark.length() == 0) {
+            Toast.makeText(getActivity(), "Mark Required", Toast.LENGTH_LONG).show();
             return false;
         }
-        String facultyCode = unitCode.substring(0, 3);
-        String numCode = unitCode.substring(3, 7);
-        if (!isAlpha(facultyCode) && !isInteger(numCode)) {
-            Toast.makeText(getActivity(), "Unit Code Has Incorrect Form", Toast.LENGTH_LONG).show();
-            return false;
-        }
-        // Check that mark is not over 100
         if (Integer.parseInt(mark) > 100) {
-            Toast.makeText(getActivity(), "Mark Must be Between 0-100", Toast.LENGTH_LONG).show();
+            Toast.makeText(getActivity(), "Invalid Mark", Toast.LENGTH_LONG).show();
             return false;
         }
         return true;
