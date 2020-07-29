@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp">
+
+    <EditText
+        android:id="@+id/et_unit_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/unit_name_code_optional"/>
+
+    <RadioGroup
+        android:id="@+id/radio_group"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/et_unit_name">
+        <RadioButton
+            android:id="@+id/radio_one"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/level_1_unit"
+            android:checked="true"/>
+
+        <RadioButton
+            android:id="@+id/radio_two"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/level_2_plus_unit" />
+    </RadioGroup>
+
+    <EditText
+        android:id="@+id/et_credit_points"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/credit_points"
+        android:layout_below="@+id/radio_group"
+        android:layout_alignParentStart="true"
+        android:inputType="number"/>
+
+    <EditText
+        android:id="@+id/et_mark"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/mark"
+        android:layout_below="@+id/et_credit_points"
+        android:layout_alignParentStart="true"
+        android:inputType="number"/>
+
+</RelativeLayout>
