@@ -32,25 +32,19 @@ public class UnitDialog extends AppCompatDialogFragment {
         View view = inflater.inflate(R.layout.layout_unit_dialog, null);
         builder.setView(view)
                 .setTitle("Add a new unit")
-                .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
+                .setNegativeButton("Cancel", (dialog, which) -> {
 
-                    }
                 })
-                .setPositiveButton("Add", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        // find which radio btn was clicked
-                        int radioId = radioGroup.getCheckedRadioButtonId();
-                        radioButton = view.findViewById(radioId);
+                .setPositiveButton("Add", (dialog, which) -> {
+                    // find which radio btn was clicked
+                    int radioId = radioGroup.getCheckedRadioButtonId();
+                    radioButton = view.findViewById(radioId);
 
-                        String unitName = etUnitName.getText().toString();
-                        String yearLevel = radioButton.getText().toString();
-                        String creditPts = etCreditPoints.getText().toString();
-                        String mark = etMark.getText().toString();
-                        listener.addUnit(unitName, yearLevel, creditPts, mark);
-                    }
+                    String unitName = etUnitName.getText().toString();
+                    String yearLevel = radioButton.getText().toString();
+                    String creditPts = etCreditPoints.getText().toString();
+                    String mark = etMark.getText().toString();
+                    listener.addUnit(unitName, yearLevel, creditPts, mark);
                 });
 
         etUnitName = view.findViewById(R.id.et_unit_name);

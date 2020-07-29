@@ -46,13 +46,9 @@ public class AssessRecyclerAdapter extends RecyclerView.Adapter<AssessRecyclerAd
     public void onBindViewHolder(@NonNull AssessRecyclerAdapter.ViewHolder holder, int position) {
         holder.tvAssessmentName.setText(data.get(position).getAssessmentName());
         holder.tvValue.setText(data.get(position).getValue());
-        holder.tvMark.setText(data.get(position).getMark());
-        holder.btnDel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                deleteListener.onClickDel(data.get(position).getId(), data.get(position).getAssessmentName());
-            }
-        });
+        holder.tvMarkNum.setText(data.get(position).getMarkNumerator());
+        holder.tvMarkDen.setText(data.get(position).getMarkDenominator());
+        holder.btnDel.setOnClickListener(v -> deleteListener.onClickDel(data.get(position).getId(), data.get(position).getAssessmentName()));
     }
 
     @Override
@@ -63,14 +59,16 @@ public class AssessRecyclerAdapter extends RecyclerView.Adapter<AssessRecyclerAd
     public class ViewHolder extends RecyclerView.ViewHolder {
         public TextView tvAssessmentName;
         public TextView tvValue;
-        public TextView tvMark;
+        public TextView tvMarkNum;
+        public TextView tvMarkDen;
         public ImageButton btnDel;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             tvAssessmentName = itemView.findViewById(R.id.tv_assessment_name);
-            tvValue = itemView.findViewById(R.id.tv_value_input);
-            tvMark = itemView.findViewById(R.id.tv_mark_input);
+            tvValue = itemView.findViewById(R.id.tv_value_val);
+            tvMarkNum = itemView.findViewById(R.id.tv_mark_numerator);
+            tvMarkDen = itemView.findViewById(R.id.tv_mark_denominator);
             btnDel = itemView.findViewById(R.id.btn_del);
         }
     }

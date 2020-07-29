@@ -22,7 +22,7 @@ public interface AssessmentDao {
     @Query("DELETE FROM assessments")
     void deleteAllAssessments();
 
-    @Query("SELECT value, mark FROM assessments")
+    @Query("SELECT value, markNumerator, markDenominator FROM assessments")
     List<AssessmentValue> getAssessmentValues();
 
 }

@@ -25,13 +25,17 @@ public class Assessment {
     @ColumnInfo(name = "value")
     private String value;
 
-    @ColumnInfo(name = "mark")
-    private String mark;
+    @ColumnInfo(name = "markNumerator")
+    private String markNumerator;
 
-    public Assessment(String assessmentName, String value, String mark) {
+    @ColumnInfo(name = "markDenominator")
+    private String markDenominator;
+
+    public Assessment(String assessmentName, String value, String markNumerator, String markDenominator) {
         this.assessmentName = assessmentName;
         this.value = value;
-        this.mark = mark;
+        this.markNumerator = markNumerator;
+        this.markDenominator = markDenominator;
     }
 
     public int getId() {
@@ -46,8 +50,12 @@ public class Assessment {
         return value;
     }
 
-    public String getMark() {
-        return mark;
+    public String getMarkNumerator() {
+        return markNumerator;
+    }
+
+    public String getMarkDenominator() {
+        return markDenominator;
     }
 
     public void setId(@NonNull int id) {

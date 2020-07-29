@@ -2,6 +2,7 @@
 <androidx.cardview.widget.CardView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/card_view"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -9,10 +10,10 @@
     card_view:cardBackgroundColor="#E3E4E4"
     card_view:cardCornerRadius="20dp">
 
-    <RelativeLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="16dp" >
+        android:padding="14dp">
 
         <TextView
             android:id="@+id/tv_assessment_name"
@@ -20,61 +21,96 @@
             android:layout_height="wrap_content"
             android:textColor="#000000"
             android:textSize="18sp"
-            android:textStyle="bold"/>
+            android:textStyle="bold"
+            tools:ignore="MissingConstraints" />
 
         <TextView
             android:id="@+id/tv_value"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_assessment_name"
+            android:text="@string/value_colon"
             android:textColor="#000000"
             android:textSize="18sp"
-            android:layout_below="@+id/tv_assessment_name"
-            android:layout_alignParentStart="true"
-            android:text="@string/value"/>
+            card_view:layout_constraintTop_toBottomOf="@+id/tv_assessment_name"
+            tools:ignore="MissingConstraints" />
 
         <TextView
             android:id="@+id/tv_assessment_mark"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/tv_value"
-            android:layout_alignParentStart="true"
+            android:text="@string/mark_colon"
             android:textColor="#000000"
             android:textSize="18sp"
-            android:text="@string/mark"/>
+            card_view:layout_constraintStart_toStartOf="@+id/ver_gl_1"
+            card_view:layout_constraintTop_toBottomOf="@+id/tv_assessment_name" />
 
         <TextView
-            android:id="@+id/tv_value_input"
+            android:id="@+id/tv_value_val"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:textColor="#000000"
+            android:textSize="18sp"
+            card_view:layout_constraintStart_toEndOf="@+id/tv_value"
+            card_view:layout_constraintTop_toBottomOf="@+id/tv_assessment_name" />
+
+        <TextView
+            android:id="@+id/tv_mark_numerator"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/tv_assessment_name"
-            android:layout_marginStart="68dp"
-            android:layout_marginTop="0dp"
-            android:layout_toEndOf="@+id/tv_value"
+            android:layout_marginStart="8dp"
             android:textColor="#000000"
-            android:textSize="18sp" />
+            android:textSize="18sp"
+            card_view:layout_constraintStart_toEndOf="@+id/tv_assessment_mark"
+            card_view:layout_constraintTop_toBottomOf="@+id/tv_assessment_name" />
 
         <TextView
-            android:id="@+id/tv_mark_input"
+            android:id="@+id/tv_slash"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/tv_value_input"
-            android:layout_alignParentStart="@+id/tv_value_input"
-            android:layout_marginStart="73dp"
-            android:layout_marginTop="0dp"
-            android:layout_toEndOf="@+id/tv_assessment_mark"
+            android:layout_marginStart="8dp"
+            android:text="@string/slash"
+            android:textSize="20sp"
+            android:textColor="@android:color/black"
+            card_view:layout_constraintStart_toEndOf="@+id/tv_mark_numerator"
+            card_view:layout_constraintTop_toBottomOf="@+id/tv_assessment_name" />
+
+        <TextView
+            android:id="@+id/tv_mark_denominator"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_assessment_name"
+            android:layout_marginStart="8dp"
             android:textColor="#000000"
-            android:textSize="18sp" />
+            android:textSize="18sp"
+            card_view:layout_constraintStart_toEndOf="@+id/tv_slash"
+            card_view:layout_constraintTop_toBottomOf="@+id/tv_assessment_name" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/ver_gl_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            card_view:layout_constraintGuide_percent="0.30" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/ver_gl_2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            card_view:layout_constraintGuide_percent="0.80" />
 
         <ImageButton
             android:id="@+id/btn_del"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_marginTop="12dp"
-            android:layout_marginEnd="20dp"
-            card_view:srcCompat="@drawable/ic_delete_black_24dp"
-            android:backgroundTint="#E3E4E4"/>
+            android:layout_width="22dp"
+            android:layout_height="28dp"
+            android:backgroundTint="#E3E4E4"
+            card_view:layout_constraintStart_toStartOf="@+id/ver_gl_2"
+            card_view:layout_constraintTop_toBottomOf="@+id/tv_assessment_name"
+            card_view:srcCompat="@drawable/ic_delete_black_24dp" />
 
-    </RelativeLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.cardview.widget.CardView>

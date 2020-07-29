@@ -10,6 +10,9 @@ public class AssessmentValue {
     @ColumnInfo(name = "value")
     public String value;
 
-    @ColumnInfo(name = "mark")
-    public String mark;
+    @ColumnInfo(name = "markNumerator")
+    public String markNumerator;
+
+    @ColumnInfo(name = "markDenominator")
+    public String markDenominator;
 }

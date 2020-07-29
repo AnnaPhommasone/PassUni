@@ -6,6 +6,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -34,14 +35,10 @@ import java.util.List;
  * A fragment that for the second tab. It calculates the unit/subject mark based on the
  * given assessments (an assessment has a name, value, and what mark the student got).
  */
-public class Fragment2 extends Fragment implements DeleteListener {
+public class Fragment2 extends Fragment implements DeleteListener, AssessmentDialog.AssessmentDialogListener {
 
     private RecyclerView recyclerView;
     private AssessRecyclerAdapter recyclerAdapter;
-    private EditText etAssessmentName;
-    private EditText etValue;
-    private EditText etMark;
-    private Button btnAddAssessment;
     private Button btnCalcMark;
     private TextView tvUnitMark;
     private ArrayList<Assessment> assessments;
@@ -53,9 +50,10 @@ public class Fragment2 extends Fragment implements DeleteListener {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
-        assessmentViewModel = ViewModelProviders.of(this,
-                new AssessmentViewModelFactory(getActivity().getApplication()))
-                .get(AssessmentViewModel.class);
+        assessmentViewModel = new ViewModelProvider(this).get(AssessmentViewModel.class);
+//        assessmentViewModel = ViewModelProviders.of(this,
+//                new AssessmentViewModelFactory(getActivity().getApplication()))
+//                .get(AssessmentViewModel.class);
     }
 
     @Override
@@ -68,20 +66,6 @@ public class Fragment2 extends Fragment implements DeleteListener {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
-        etAssessmentName = view.findViewById(R.id.et_assessment_name);
-        etValue = view.findViewById(R.id.et_value);
-        etMark = view.findViewById(R.id.et_mark);
-        btnAddAssessment = view.findViewById(R.id.btn_add_assessment);
-        btnAddAssessment.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String assessmentName = etAssessmentName.getText().toString();
-                String value = etValue.getText().toString();
-                String mark = etMark.getText().toString();
-                addAssessment(assessmentName, value, mark);
-            }
-        });
         assessments = new ArrayList<>();
         recyclerAdapter = new AssessRecyclerAdapter(assessments, assessmentViewModel);
         recyclerAdapter.setDeleteListener(this);
@@ -94,12 +78,7 @@ public class Fragment2 extends Fragment implements DeleteListener {
         });
 
         btnCalcMark = view.findViewById(R.id.btn_calculate_mark);
-        btnCalcMark.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                new CalculateUnitMark().execute();
-            }
-        });
+        btnCalcMark.setOnClickListener(v -> new CalculateUnitMark().execute());
         tvUnitMark = view.findViewById(R.id.tv_unit_mark);
     }
 
@@ -111,9 +90,15 @@ public class Fragment2 extends Fragment implements DeleteListener {
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        if (item.getItemId() == R.id.action_del_assess) {
-            assessmentViewModel.deleteAll();
-            return true;
+        switch (item.getItemId()) {
+            case R.id.action_del_assess:
+                assessmentViewModel.deleteAll();
+                return true;
+            case R.id.action_add_assess:
+                openDialog();
+                return true;
+            case R.id.action_info_unit:
+                return true;
         }
         return super.onOptionsItemSelected(item);
     }
@@ -123,33 +108,41 @@ public class Fragment2 extends Fragment implements DeleteListener {
     public void onClickDel(int id, String name) {
         assessmentViewModel.deleteAssessment(id);
         recyclerAdapter.notifyDataSetChanged();
-        Toast.makeText(getActivity(), "Assessment Deleted", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getActivity(), name + " Deleted", Toast.LENGTH_SHORT).show();
     }
 
-    // Adds the new Assessment to the assessments database, and clears the input fields on the
-    // screen.
-    private void addAssessment(String assessmentName, String value, String mark) {
-        if (correctInputs(assessmentName, value, mark)) {
-            Assessment newAssessment = new Assessment(assessmentName, value, mark);
-            assessmentViewModel.insert(newAssessment);
-            resetInputFields();
-            etAssessmentName.requestFocus();
-            Toast.makeText(getActivity(), "Assessment Added", Toast.LENGTH_SHORT).show();
+    @Override
+    public void addAssessment(String assessmentName, String value, String markNum, String markDen) {
+        if (correctInputs(value, markNum, markDen)) {
+            if (assessmentName.length() == 0) {
+                assessmentName = "Assessment #" + recyclerAdapter.getItemCount() + 1;
+            }
+            Assessment assessment = new Assessment(assessmentName, value, markNum, markDen);
+            assessmentViewModel.insert(assessment);
+            Toast.makeText(getActivity(), assessmentName + " Added", Toast.LENGTH_SHORT).show();
         }
     }
 
-    // Clears the input fields on the screen.
-    private void resetInputFields() {
-        etAssessmentName.getText().clear();
-        etValue.getText().clear();
-        etMark.getText().clear();
+//    private void addAssessment(String assessmentName, String value, String mark) {
+//        if (correctInputs(value, mark)) {
+//            Assessment newAssessment = new Assessment(assessmentName, value, mark);
+//            assessmentViewModel.insert(newAssessment);
+//            Toast.makeText(getActivity(), "Assessment Added", Toast.LENGTH_SHORT).show();
+//        }
+//    }
+
+    // Opens a custom dialog box for users to enter in the details of the new assessment.
+    private void openDialog() {
+        AssessmentDialog dialog = new AssessmentDialog();
+        dialog.setTargetFragment(Fragment2.this, 1);
+        dialog.show(getActivity().getSupportFragmentManager(), "AssessmentDialog");
     }
 
-    // Checks all fields are not empty and value of an assessment is between 1-100.
-    // It it possible to get a mark over 100%.
-    private boolean correctInputs(String assessmentName, String value, String mark) {
-        if (assessmentName.length() == 0 || value.length() == 0 || mark.length() == 0) {
-            Toast.makeText(getActivity(), "All Fields Are Required", Toast.LENGTH_LONG).show();
+    // Checks if value and mark fields are not empty, and value is in 0-100 range.
+    // A student can score higher than the total amount of marks. e.g. 20.5/20 (as I have done b4:) )
+    private boolean correctInputs(String value, String markNum, String markDen) {
+        if (value.length() == 0 || markNum.length() == 0 || markDen.length() == 0) {
+            Toast.makeText(getActivity(), "Invalid Input", Toast.LENGTH_LONG).show();
             return false;
         }
         if (Double.parseDouble(value) == 0 || Double.parseDouble(value) > 100) {
@@ -182,8 +175,8 @@ public class Fragment2 extends Fragment implements DeleteListener {
                 List<AssessmentValue> assessmentValues = assessmentViewModel.getAssessmentValues();
                 float unitMark = 0.0f;
                 for (AssessmentValue a : assessmentValues) {
-                    float mark = Float.parseFloat(a.mark) / 100;
                     float value = Float.parseFloat(a.value);
+                    float mark = Float.parseFloat(a.markNumerator) / Float.parseFloat(a.markDenominator);
                     unitMark += (mark * value);
                 }
                 overallMark = Math.round(unitMark);

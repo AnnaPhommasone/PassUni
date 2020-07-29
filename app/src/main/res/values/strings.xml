@@ -29,5 +29,9 @@
     <string name="year_level_colon">Year Level:</string>
     <string name="one">1</string>
     <string name="two_plus">2+</string>
+    <string name="slash">/</string>
+    <string name="assessment_name_optional">Assessment Name (optional)</string>
+    <string name="value_or_weight">Value/Weight</string>
+    <string name="value_colon">Value:</string>
 
 </resources>

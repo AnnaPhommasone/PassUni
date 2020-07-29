@@ -118,16 +118,8 @@ public class Fragment1 extends Fragment implements DeleteListener, UnitDialog.Un
 
     // Checks if the given unit details satisfy conditions.
     private boolean unitDetailsCorrect(String creditPoints, String mark) {
-        if (creditPoints.length() == 0 && mark.length() == 0) {
-            Toast.makeText(getActivity(), "Input required", Toast.LENGTH_LONG).show();
-            return false;
-        }
-        if (creditPoints.length() == 0) {
-            Toast.makeText(getActivity(), "Credit Points Required", Toast.LENGTH_LONG).show();
-            return false;
-        }
-        if (mark.length() == 0) {
-            Toast.makeText(getActivity(), "Mark Required", Toast.LENGTH_LONG).show();
+        if (creditPoints.length() == 0 || mark.length() == 0) {
+            Toast.makeText(getActivity(), "Invalid Input", Toast.LENGTH_LONG).show();
             return false;
         }
         if (Integer.parseInt(mark) > 100) {
