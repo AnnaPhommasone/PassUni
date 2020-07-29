@@ -9,6 +9,7 @@ public interface DeleteListener {
      * Deletes the item given by the specific ID.
      *
      * @param id the ID of the item to be deleted
+     * @param name the name of the item to be deleted
      */
-    void onClickDel(int id);
+    void onClickDel(int id, String name);
 }

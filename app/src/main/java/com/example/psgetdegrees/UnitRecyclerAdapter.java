@@ -45,13 +45,14 @@ public class UnitRecyclerAdapter extends RecyclerView.Adapter<UnitRecyclerAdapte
 
     @Override
     public void onBindViewHolder(@NonNull UnitRecyclerAdapter.ViewHolder holder, int position) {
-        holder.tvUnitCode.setText(data.get(position).getUnitCode());
+        holder.tvUnitName.setText(data.get(position).getUnitName());
+        holder.tvYearLevel.setText(data.get(position).getYearLevel());
         holder.tvCreditPoints.setText(data.get(position).getCreditPoints());
         holder.tvMark.setText(data.get(position).getMark());
         holder.btnDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                deleteListener.onClickDel(data.get(position).getId());
+                deleteListener.onClickDel(data.get(position).getId(), data.get(position).getUnitName());
             }
         });
     }
@@ -62,16 +63,18 @@ public class UnitRecyclerAdapter extends RecyclerView.Adapter<UnitRecyclerAdapte
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        public TextView tvUnitCode;
+        public TextView tvUnitName;
+        public TextView tvYearLevel;
         public TextView tvCreditPoints;
         public TextView tvMark;
         public ImageButton btnDelete;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            tvUnitCode = itemView.findViewById(R.id.et_unit_code);
-            tvCreditPoints = itemView.findViewById(R.id.et_credit_points);
-            tvMark = itemView.findViewById(R.id.et_mark);
+            tvUnitName = itemView.findViewById(R.id.tv_unit_name);
+            tvYearLevel = itemView.findViewById(R.id.tv_year_level_val);
+            tvCreditPoints = itemView.findViewById(R.id.tv_credit_val);
+            tvMark = itemView.findViewById(R.id.tv_mark_val);
             btnDelete = itemView.findViewById(R.id.btn_del);
         }
     }

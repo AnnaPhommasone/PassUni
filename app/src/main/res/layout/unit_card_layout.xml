@@ -2,6 +2,7 @@
 <androidx.cardview.widget.CardView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/card_view"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -9,72 +10,118 @@
     card_view:cardBackgroundColor="#E3E4E4"
     card_view:cardCornerRadius="20dp">
 
-    <RelativeLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="16dp" >
+        android:padding="16dp">
 
         <TextView
-            android:id="@+id/et_unit_code"
+            android:id="@+id/tv_unit_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="#000000"
             android:textSize="18sp"
-            android:textStyle="bold"/>
+            android:textStyle="bold"
+            tools:ignore="MissingConstraints" />
 
         <TextView
             android:id="@+id/tv_credit_points"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_unit_name"
+            android:text="@string/credit"
             android:textColor="#000000"
             android:textSize="18sp"
-            android:layout_below="@+id/et_unit_code"
-            android:layout_alignParentStart="true"
-            android:text="@string/credit_points"/>
+            card_view:layout_constraintStart_toStartOf="@+id/ver_gl_1"
+            card_view:layout_constraintTop_toBottomOf="@+id/tv_unit_name"
+            tools:ignore="MissingConstraints" />
 
         <TextView
             android:id="@+id/tv_mark"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/tv_credit_points"
-            android:layout_alignParentStart="true"
+            android:layout_below="@+id/tv_unit_name"
+            android:text="@string/mark_colon"
             android:textColor="#000000"
             android:textSize="18sp"
-            android:text="@string/mark"/>
+            card_view:layout_constraintStart_toStartOf="@+id/ver_gl_2"
+            card_view:layout_constraintTop_toTopOf="@+id/tv_credit_points" />
 
         <TextView
-            android:id="@+id/et_credit_points"
+            android:id="@+id/tv_credit_val"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/et_unit_code"
-            android:layout_marginStart="45dp"
-            android:layout_marginTop="2dp"
-            android:layout_toEndOf="@+id/tv_credit_points"
+            android:layout_below="@+id/tv_unit_name"
+            android:layout_marginStart="8dp"
             android:textColor="#000000"
-            android:textSize="18sp" />
+            android:textSize="18sp"
+            card_view:layout_constraintStart_toEndOf="@+id/tv_credit_points"
+            card_view:layout_constraintTop_toTopOf="@+id/tv_credit_points" />
 
         <TextView
-            android:id="@+id/et_mark"
+            android:id="@+id/tv_mark_val"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/et_credit_points"
-            android:layout_alignParentStart="@+id/et_credit_points"
-            android:layout_marginStart="107dp"
-            android:layout_marginTop="1dp"
-            android:layout_toEndOf="@+id/tv_mark"
+            android:layout_below="@+id/tv_unit_name"
+            android:layout_marginStart="8dp"
             android:textColor="#000000"
-            android:textSize="18sp" />
+            android:textSize="18sp"
+            card_view:layout_constraintStart_toEndOf="@+id/tv_mark"
+            card_view:layout_constraintTop_toTopOf="@+id/tv_credit_points" />
+
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/ver_gl_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            card_view:layout_constraintGuide_percent="0.35" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/ver_gl_2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            card_view:layout_constraintGuide_percent="0.60" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/ver_gl_3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            card_view:layout_constraintGuide_percent="0.85" />
 
         <ImageButton
             android:id="@+id/btn_del"
+            android:layout_width="24dp"
+            android:layout_height="26dp"
+            android:backgroundTint="#E3E4E4"
+            card_view:layout_constraintStart_toStartOf="@+id/ver_gl_3"
+            card_view:layout_constraintTop_toBottomOf="@+id/tv_unit_name"
+            card_view:srcCompat="@drawable/ic_delete_black_24dp" />
+
+        <TextView
+            android:id="@+id/tv_year_level"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_marginTop="12dp"
-            android:layout_marginEnd="20dp"
-            card_view:srcCompat="@drawable/ic_delete_black_24dp"
-            android:backgroundTint="#E3E4E4"/>
+            android:text="@string/year_level_colon"
+            android:textColor="@android:color/black"
+            android:textSize="18sp"
+            card_view:layout_constraintTop_toBottomOf="@+id/tv_unit_name"
+            tools:ignore="MissingConstraints"
+            tools:layout_editor_absoluteX="-2dp" />
 
-    </RelativeLayout>
+        <TextView
+            android:id="@+id/tv_year_level_val"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:textColor="@android:color/black"
+            android:textSize="18sp"
+            card_view:layout_constraintStart_toEndOf="@+id/tv_year_level"
+            card_view:layout_constraintTop_toBottomOf="@+id/tv_unit_name" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.cardview.widget.CardView>

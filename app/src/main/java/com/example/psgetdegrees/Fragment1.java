@@ -6,7 +6,6 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -39,10 +38,6 @@ public class Fragment1 extends Fragment implements DeleteListener, UnitDialog.Un
 
     private RecyclerView recyclerView;
     private UnitRecyclerAdapter recyclerAdapter;
-    private Button btnAddUnit;
-    private EditText etUnitCode;
-    private EditText etCreditPoints;
-    private EditText etMark;
     private Button btnCalcWam;
     private TextView tvWam;
     private ArrayList<Unit> units;
@@ -67,21 +62,6 @@ public class Fragment1 extends Fragment implements DeleteListener, UnitDialog.Un
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        etUnitCode = view.findViewById(R.id.et_unit_code);
-        etCreditPoints = view.findViewById(R.id.et_credit_points);
-        etMark = view.findViewById(R.id.et_mark);
-        btnAddUnit = view.findViewById(R.id.btn_add_unit);
-        btnAddUnit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String unitCode = etUnitCode.getText().toString();
-                String creditPoints = etCreditPoints.getText().toString();
-                String mark = etMark.getText().toString();
-                addUnit(unitCode, creditPoints, mark);
-                resetInputFields();
-                etUnitCode.requestFocus();
-            }
-        });
         units = new ArrayList<>();
         recyclerAdapter = new UnitRecyclerAdapter(units, unitViewModel);
         recyclerAdapter.setDeleteListener(this);
@@ -124,26 +104,24 @@ public class Fragment1 extends Fragment implements DeleteListener, UnitDialog.Un
         return super.onOptionsItemSelected(item);
     }
 
-    // Adds the new Unit to the units database.
-    private void addUnit(String unitName, String creditPoints, String mark) {
+    @Override
+    public void addUnit(String unitName, String yearLevel, String creditPoints, String mark) {
         if (unitDetailsCorrect(creditPoints, mark)) {
-            Unit newUnit = new Unit(unitName, creditPoints, mark);
-            unitViewModel.insert(newUnit);
-            Toast.makeText(getActivity(), "Unit Added", Toast.LENGTH_SHORT).show();
+            if (unitName.length() == 0) {
+                unitName = "Unit #" + recyclerAdapter.getItemCount() + 1;
+            }
+            Unit unit = new Unit(unitName, yearLevel, creditPoints, mark);
+            unitViewModel.insert(unit);
+            Toast.makeText(getActivity(), unitName + " Added", Toast.LENGTH_SHORT).show();
         }
     }
 
-    // Clears the input text fields on the screen. This method is invoked after the user presses
-    // the "Add Unit" button.
-    private void resetInputFields() {
-        etUnitCode.getText().clear();
-        etCreditPoints.getText().clear();
-        etMark.getText().clear();
-    }
-
-    // Checks if the given unit details (unit code, credit points, and mark)
-    // satisfy conditions.
+    // Checks if the given unit details satisfy conditions.
     private boolean unitDetailsCorrect(String creditPoints, String mark) {
+        if (creditPoints.length() == 0 && mark.length() == 0) {
+            Toast.makeText(getActivity(), "Input required", Toast.LENGTH_LONG).show();
+            return false;
+        }
         if (creditPoints.length() == 0) {
             Toast.makeText(getActivity(), "Credit Points Required", Toast.LENGTH_LONG).show();
             return false;
@@ -159,48 +137,18 @@ public class Fragment1 extends Fragment implements DeleteListener, UnitDialog.Un
         return true;
     }
 
-    // Checks if given string only contains letters
-    private boolean isAlpha(String s) {
-        char[] chars = s.toCharArray();
-        for (char c : chars) {
-            if (!Character.isLetter(c)) {
-                return false;
-            }
-        }
-        return true;
-    }
-
-    // Checks if given string is an integer
-    private boolean isInteger(String s) {
-        boolean isValidInt = false;
-        try {
-            Integer.parseInt(s);
-            isValidInt = true;
-        } catch (NumberFormatException e) {
-            // s is not an integer
-        }
-        return isValidInt;
-    }
-
     // Deletes the Unit identified by the given unique ID
-    public void onClickDel(int id) {
+    public void onClickDel(int id, String name) {
         unitViewModel.deleteById(id);
         recyclerAdapter.notifyDataSetChanged();
-        Toast.makeText(getActivity(), "Unit Deleted", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getActivity(), name + " Deleted", Toast.LENGTH_SHORT).show();
     }
 
+    // Opens a custom dialog for users to enter in the new unit's details.
     private void openDialog() {
         UnitDialog unitDialog = new UnitDialog();
         unitDialog.setTargetFragment(Fragment1.this, 1);
         unitDialog.show(getActivity().getSupportFragmentManager(), "UnitDialog");
-    }
-
-    @Override
-    public void addUnit(String unitName, String yearLevel, String creditPoints, String mark) {
-        if (unitName.length() == 0) {
-            unitName = "Unit " + recyclerAdapter.getItemCount() + 1;
-        }
-        Toast.makeText(getActivity(), unitName + " Added", Toast.LENGTH_SHORT).show();
     }
 
     // Uses the background thread to retrieve the Unit details from the units database,
@@ -218,14 +166,14 @@ public class Fragment1 extends Fragment implements DeleteListener, UnitDialog.Un
                     float sumWeightedMarks = 0.0f;
                     float sumWeightedCreditPoints = 0.0f;
                     for (UnitValue row : rows) {
+                        String yearLevel = row.yearLevel;
                         int mark = Integer.parseInt(row.mark);
                         int creditPoints = Integer.parseInt(row.creditPoints);
-                        int yearLevel = Integer.parseInt(row.unitCode.substring(3, 4));
                         double weight;
-                        if (yearLevel >= 2) {
-                            weight = 1.0;
-                        } else {
+                        if (yearLevel.equals("1")) {
                             weight = 0.5;
+                        } else {
+                            weight = 1.0;
                         }
                         sumWeightedMarks += (mark * creditPoints * weight);
                         sumWeightedCreditPoints += (creditPoints * weight);
@@ -234,7 +182,7 @@ public class Fragment1 extends Fragment implements DeleteListener, UnitDialog.Un
                 }
                 return wam;
             } catch (Exception e) {
-                Log.i("WAM", "Error" + e.toString());
+                Log.i("CalculateWam", "Error" + e.toString());
             }
             return wam;
         }

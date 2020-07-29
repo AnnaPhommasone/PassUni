@@ -50,7 +50,7 @@ public class AssessRecyclerAdapter extends RecyclerView.Adapter<AssessRecyclerAd
         holder.btnDel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                deleteListener.onClickDel(data.get(position).getId());
+                deleteListener.onClickDel(data.get(position).getId(), data.get(position).getAssessmentName());
             }
         });
     }

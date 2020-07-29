@@ -6,7 +6,6 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -29,7 +28,6 @@ import com.example.psgetdegrees.assessmentProvider.AssessmentViewModelFactory;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 
 /**
@@ -105,6 +103,29 @@ public class Fragment2 extends Fragment implements DeleteListener {
         tvUnitMark = view.findViewById(R.id.tv_unit_mark);
     }
 
+    @Override
+    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
+        inflater.inflate(R.menu.unit_options_menu, menu);
+        super.onCreateOptionsMenu(menu, inflater);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if (item.getItemId() == R.id.action_del_assess) {
+            assessmentViewModel.deleteAll();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    // Deletes the Assessment identified by the given unique ID.
+    @Override
+    public void onClickDel(int id, String name) {
+        assessmentViewModel.deleteAssessment(id);
+        recyclerAdapter.notifyDataSetChanged();
+        Toast.makeText(getActivity(), "Assessment Deleted", Toast.LENGTH_SHORT).show();
+    }
+
     // Adds the new Assessment to the assessments database, and clears the input fields on the
     // screen.
     private void addAssessment(String assessmentName, String value, String mark) {
@@ -148,29 +169,6 @@ public class Fragment2 extends Fragment implements DeleteListener {
         return sumValues == 100.0;
     }
 
-    @Override
-    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
-        inflater.inflate(R.menu.unit_options_menu, menu);
-        super.onCreateOptionsMenu(menu, inflater);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        if (item.getItemId() == R.id.action_del_assess) {
-            assessmentViewModel.deleteAll();
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
-
-    // Deletes the Assessment identified by the given unique ID.
-    @Override
-    public void onClickDel(int id) {
-        assessmentViewModel.deleteAssessment(id);
-        recyclerAdapter.notifyDataSetChanged();
-        Toast.makeText(getActivity(), "Assessment Deleted", Toast.LENGTH_SHORT).show();
-    }
-
     // Uses the background thread to retrieve the given assessment details,
     // and calculate the unit/subject mark.
     // After calculating the mark, this class populates the text view with the unit/subject mark.
@@ -196,7 +194,7 @@ public class Fragment2 extends Fragment implements DeleteListener {
             return overallMark;
         }
 
-        // Populates a text view with the Unit mark.
+        // Populates the text view with the Unit mark.
         @Override
         protected void onPostExecute(Integer overallMark) {
             super.onPostExecute(overallMark);

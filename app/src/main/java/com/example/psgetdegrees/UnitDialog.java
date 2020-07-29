@@ -14,7 +14,6 @@ import android.widget.RadioGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatDialogFragment;
-import androidx.fragment.app.Fragment;
 
 public class UnitDialog extends AppCompatDialogFragment {
 
@@ -56,7 +55,7 @@ public class UnitDialog extends AppCompatDialogFragment {
 
         etUnitName = view.findViewById(R.id.et_unit_name);
         radioGroup = view.findViewById(R.id.radio_group);
-        etCreditPoints = view.findViewById(R.id.et_credit_points);
+        etCreditPoints = view.findViewById(R.id.et_credit_pts);
         etMark = view.findViewById(R.id.et_mark);
 
         return builder.create();

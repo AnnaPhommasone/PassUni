@@ -8,8 +8,8 @@ import androidx.room.ColumnInfo;
  * the mark column.
  */
 public class UnitValue {
-    @ColumnInfo(name = "unitCode")
-    public String unitCode;
+    @ColumnInfo(name = "yearLevel")
+    public String yearLevel;
 
     @ColumnInfo(name = "creditPoints")
     public String creditPoints;

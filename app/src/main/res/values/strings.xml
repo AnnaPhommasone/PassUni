@@ -24,5 +24,10 @@
     <string name="unit_name_code_optional">Unit Name/Code (optional)</string>
     <string name="level_1_unit">Level 1 Unit</string>
     <string name="level_2_plus_unit">Level 2+ Unit</string>
+    <string name="credit">Credit:</string>
+    <string name="mark_colon">Mark:</string>
+    <string name="year_level_colon">Year Level:</string>
+    <string name="one">1</string>
+    <string name="two_plus">2+</string>
 
 </resources>

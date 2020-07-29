@@ -22,7 +22,7 @@ public interface UnitDao {
     @Query("DELETE FROM units")
     void deleteAllUnits();
 
-    @Query("SELECT unitCode, creditPoints, mark FROM units")
+    @Query("SELECT yearLevel, creditPoints, mark FROM units")
     List<UnitValue> getUnitValues();
 
 }

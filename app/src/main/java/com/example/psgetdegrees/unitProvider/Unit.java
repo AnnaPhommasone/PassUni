@@ -19,8 +19,11 @@ public class Unit {
     @ColumnInfo(name = "unitId")
     private int id;
 
-    @ColumnInfo(name = "unitCode")
-    private String unitCode;
+    @ColumnInfo(name = "yearLevel")
+    private String yearLevel;
+
+    @ColumnInfo(name = "unitName")
+    private String unitName;
 
     @ColumnInfo(name = "creditPoints")
     private String creditPoints;
@@ -28,8 +31,9 @@ public class Unit {
     @ColumnInfo(name = "mark")
     private String mark;
 
-    public Unit(String unitCode, String creditPoints, String mark) {
-        this.unitCode = unitCode;
+    public Unit(String unitName, String yearLevel, String creditPoints, String mark) {
+        this.unitName = unitName;
+        this.yearLevel = yearLevel;
         this.creditPoints = creditPoints;
         this.mark = mark;
     }
@@ -38,8 +42,12 @@ public class Unit {
         return id;
     }
 
-    public String getUnitCode() {
-        return unitCode;
+    public String getUnitName() {
+        return unitName;
+    }
+
+    public String getYearLevel() {
+        return yearLevel;
     }
 
     public String getCreditPoints() {
