@@ -19,11 +19,11 @@ public class Unit {
     @ColumnInfo(name = "unitId")
     private int id;
 
-    @ColumnInfo(name = "yearLevel")
-    private String yearLevel;
-
     @ColumnInfo(name = "unitName")
     private String unitName;
+
+    @ColumnInfo(name = "yearLevel")
+    private String yearLevel;
 
     @ColumnInfo(name = "creditPoints")
     private String creditPoints;

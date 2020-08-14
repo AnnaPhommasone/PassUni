@@ -39,4 +39,7 @@ public class AssessmentViewModel extends AndroidViewModel {
         return repository.getAssessmentValues();
     }
 
+    public void update(int assessmentId, String assessmentName, String value, String markNumerator, String markDenominator) {
+        repository.update(assessmentId, assessmentName, value, markNumerator, markDenominator);
+    }
 }

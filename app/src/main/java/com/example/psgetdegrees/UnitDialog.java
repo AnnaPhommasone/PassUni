@@ -31,7 +31,7 @@ public class UnitDialog extends AppCompatDialogFragment {
         LayoutInflater inflater = getActivity().getLayoutInflater();
         View view = inflater.inflate(R.layout.layout_unit_dialog, null);
         builder.setView(view)
-                .setTitle("Add a new unit")
+                .setTitle("Add a new subject")
                 .setNegativeButton("Cancel", (dialog, which) -> {
 
                 })

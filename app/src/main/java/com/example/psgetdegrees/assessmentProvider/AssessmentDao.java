@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.Query;
+import androidx.room.Update;
 
 import java.util.List;
 
@@ -25,4 +26,6 @@ public interface AssessmentDao {
     @Query("SELECT value, markNumerator, markDenominator FROM assessments")
     List<AssessmentValue> getAssessmentValues();
 
+    @Query("UPDATE assessments SET assessmentName = :assessmentName, value = :value, markNumerator = :markNumerator, markDenominator = :markDenominator WHERE assessmentId = :assessmentId")
+    void update(int assessmentId, String assessmentName, String value, String markNumerator, String markDenominator);
 }

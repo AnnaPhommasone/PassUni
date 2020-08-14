@@ -37,4 +37,8 @@ public class UnitRepository {
         return unitDao.getUnitValues();
     }
 
+    void update(int id, String unitName, String yearLevel, String creditPoints, String mark) {
+        unitDao.update(id, unitName, yearLevel, creditPoints, mark);
+    }
+
 }

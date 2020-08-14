@@ -52,7 +52,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/tv_unit_name"
-            android:layout_marginStart="8dp"
+            android:layout_marginStart="5dp"
             android:textColor="#000000"
             android:textSize="18sp"
             card_view:layout_constraintStart_toEndOf="@+id/tv_credit_points"
@@ -63,7 +63,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/tv_unit_name"
-            android:layout_marginStart="8dp"
+            android:layout_marginStart="5dp"
             android:textColor="#000000"
             android:textSize="18sp"
             card_view:layout_constraintStart_toEndOf="@+id/tv_mark"
@@ -75,26 +75,26 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            card_view:layout_constraintGuide_percent="0.35" />
+            card_view:layout_constraintGuide_percent="0.33" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/ver_gl_2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            card_view:layout_constraintGuide_percent="0.60" />
+            card_view:layout_constraintGuide_percent="0.55" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/ver_gl_3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            card_view:layout_constraintGuide_percent="0.85" />
+            card_view:layout_constraintGuide_percent="0.80" />
 
         <ImageButton
             android:id="@+id/btn_del"
-            android:layout_width="24dp"
-            android:layout_height="26dp"
+            android:layout_width="20dp"
+            android:layout_height="23dp"
             android:backgroundTint="#E3E4E4"
             card_view:layout_constraintStart_toStartOf="@+id/ver_gl_3"
             card_view:layout_constraintTop_toBottomOf="@+id/tv_unit_name"
@@ -115,11 +115,21 @@
             android:id="@+id/tv_year_level_val"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
+            android:layout_marginStart="5dp"
             android:textColor="@android:color/black"
             android:textSize="18sp"
             card_view:layout_constraintStart_toEndOf="@+id/tv_year_level"
             card_view:layout_constraintTop_toBottomOf="@+id/tv_unit_name" />
+
+        <ImageButton
+            android:id="@+id/btn_edit"
+            android:layout_width="23dp"
+            android:layout_height="23dp"
+            android:layout_marginStart="16dp"
+            android:backgroundTint="#E3E4E4"
+            card_view:layout_constraintStart_toEndOf="@+id/btn_del"
+            card_view:layout_constraintTop_toBottomOf="@+id/tv_unit_name"
+            card_view:srcCompat="@drawable/ic_mode_edit" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

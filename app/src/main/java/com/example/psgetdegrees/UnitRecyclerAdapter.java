@@ -20,6 +20,7 @@ public class UnitRecyclerAdapter extends RecyclerView.Adapter<UnitRecyclerAdapte
     private ArrayList<Unit> data;
     private UnitViewModel unitViewModel;
     private DeleteListener deleteListener;
+    private EditUnitListener editUnitListener;
 
     public UnitRecyclerAdapter(List<Unit> data, UnitViewModel unitViewModel) {
         this.data = (ArrayList<Unit>) data;
@@ -28,6 +29,10 @@ public class UnitRecyclerAdapter extends RecyclerView.Adapter<UnitRecyclerAdapte
 
     public void setDeleteListener(DeleteListener callBack) {
         this.deleteListener = callBack;
+    }
+
+    public void setEditUnitListener(EditUnitListener callBack) {
+        this.editUnitListener = callBack;
     }
 
     public void setData(ArrayList<Unit> data) {
@@ -55,6 +60,12 @@ public class UnitRecyclerAdapter extends RecyclerView.Adapter<UnitRecyclerAdapte
                 deleteListener.onClickDel(data.get(position).getId(), data.get(position).getUnitName());
             }
         });
+        holder.btnEdit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                editUnitListener.onClickEdit(data.get(position));
+            }
+        });
     }
 
     @Override
@@ -68,6 +79,7 @@ public class UnitRecyclerAdapter extends RecyclerView.Adapter<UnitRecyclerAdapte
         public TextView tvCreditPoints;
         public TextView tvMark;
         public ImageButton btnDelete;
+        public ImageButton btnEdit;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -76,6 +88,7 @@ public class UnitRecyclerAdapter extends RecyclerView.Adapter<UnitRecyclerAdapte
             tvCreditPoints = itemView.findViewById(R.id.tv_credit_val);
             tvMark = itemView.findViewById(R.id.tv_mark_val);
             btnDelete = itemView.findViewById(R.id.btn_del);
+            btnEdit = itemView.findViewById(R.id.btn_edit);
         }
     }
 }

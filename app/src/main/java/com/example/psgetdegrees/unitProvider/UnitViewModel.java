@@ -39,4 +39,8 @@ public class UnitViewModel extends AndroidViewModel {
         return repository.getUnitValues();
     }
 
+    public void update(int id, String unitName, String yearLevel, String creditPoints, String mark) {
+        repository.update(id, unitName, yearLevel, creditPoints, mark);
+    }
+
 }

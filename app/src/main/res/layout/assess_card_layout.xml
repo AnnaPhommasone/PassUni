@@ -93,23 +93,33 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            card_view:layout_constraintGuide_percent="0.30" />
+            card_view:layout_constraintGuide_percent="0.33" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/ver_gl_2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            card_view:layout_constraintGuide_percent="0.80" />
+            card_view:layout_constraintGuide_percent="0.78" />
 
         <ImageButton
             android:id="@+id/btn_del"
-            android:layout_width="22dp"
-            android:layout_height="28dp"
+            android:layout_width="17dp"
+            android:layout_height="21dp"
             android:backgroundTint="#E3E4E4"
             card_view:layout_constraintStart_toStartOf="@+id/ver_gl_2"
             card_view:layout_constraintTop_toBottomOf="@+id/tv_assessment_name"
             card_view:srcCompat="@drawable/ic_delete_black_24dp" />
+
+        <ImageButton
+            android:id="@+id/btn_edit_assessment"
+            android:layout_width="19dp"
+            android:layout_height="20dp"
+            android:layout_marginStart="30dp"
+            android:backgroundTint="#E3E4E4"
+            card_view:layout_constraintStart_toEndOf="@+id/btn_del"
+            card_view:layout_constraintTop_toBottomOf="@+id/tv_assessment_name"
+            card_view:srcCompat="@drawable/ic_mode_edit" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -38,4 +38,7 @@ public class AssessmentRepository {
         return assessmentDao.getAssessmentValues();
     }
 
+    void update(int assessmentId, String assessmentName, String value, String markNumerator, String markDenominator) {
+        assessmentDao.update(assessmentId, assessmentName, value, markNumerator, markDenominator);
+    }
 }

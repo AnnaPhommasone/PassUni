@@ -19,6 +19,7 @@ public class AssessRecyclerAdapter extends RecyclerView.Adapter<AssessRecyclerAd
     private ArrayList<Assessment> data;
     private AssessmentViewModel aViewModel;
     private DeleteListener deleteListener;
+    private EditAssessmentListener editAssessmentListener;
 
     public AssessRecyclerAdapter(ArrayList<Assessment> data, AssessmentViewModel aViewModel) {
         this.data = data;
@@ -27,6 +28,10 @@ public class AssessRecyclerAdapter extends RecyclerView.Adapter<AssessRecyclerAd
 
     public void setDeleteListener(DeleteListener callBack) {
         this.deleteListener = callBack;
+    }
+
+    public void setEditAssessmentListener(EditAssessmentListener callBack) {
+        this.editAssessmentListener = callBack;
     }
 
     public void setData(ArrayList<Assessment> data) {
@@ -49,6 +54,7 @@ public class AssessRecyclerAdapter extends RecyclerView.Adapter<AssessRecyclerAd
         holder.tvMarkNum.setText(data.get(position).getMarkNumerator());
         holder.tvMarkDen.setText(data.get(position).getMarkDenominator());
         holder.btnDel.setOnClickListener(v -> deleteListener.onClickDel(data.get(position).getId(), data.get(position).getAssessmentName()));
+        holder.btnEdit.setOnClickListener(v -> editAssessmentListener.onClickEdit(data.get(position)));
     }
 
     @Override
@@ -62,6 +68,7 @@ public class AssessRecyclerAdapter extends RecyclerView.Adapter<AssessRecyclerAd
         public TextView tvMarkNum;
         public TextView tvMarkDen;
         public ImageButton btnDel;
+        public ImageButton btnEdit;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -70,6 +77,7 @@ public class AssessRecyclerAdapter extends RecyclerView.Adapter<AssessRecyclerAd
             tvMarkNum = itemView.findViewById(R.id.tv_mark_numerator);
             tvMarkDen = itemView.findViewById(R.id.tv_mark_denominator);
             btnDel = itemView.findViewById(R.id.btn_del);
+            btnEdit = itemView.findViewById(R.id.btn_edit_assessment);
         }
     }
 }
