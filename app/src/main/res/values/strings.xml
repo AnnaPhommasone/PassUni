@@ -44,5 +44,12 @@
     <string name="wam_equals">WAM =</string>
     <string name="weightings_1">First year (undergraduate) - 0.5 weighting</string>
     <string name="weightings_2">All other year levels - 1.0 weighting</string>
+    <string name="subject_mark_title">Subject Mark Title</string>
+    <string name="subject_mark_equal">Subject Mark =</string>
+    <string name="hundred">100</string>
+    <string name="x">x</string>
+    <string name="scored_mark">Scored Mark</string>
+    <string name="total_marks">Total Marks</string>
+    <string name="weight_equals">Weight:</string>
 
 </resources>

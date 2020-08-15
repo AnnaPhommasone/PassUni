@@ -29,7 +29,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/tv_assessment_name"
-            android:text="@string/value_colon"
+            android:text="@string/weight_equals"
             android:textColor="#000000"
             android:textSize="18sp"
             card_view:layout_constraintTop_toBottomOf="@+id/tv_assessment_name"

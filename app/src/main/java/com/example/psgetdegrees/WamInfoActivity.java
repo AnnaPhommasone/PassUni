@@ -12,7 +12,7 @@ public class WamInfoActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.drawer_activity_info);
+        setContentView(R.layout.drawer_activity_wam_info);
 
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
