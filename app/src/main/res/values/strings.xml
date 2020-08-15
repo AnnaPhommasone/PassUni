@@ -51,5 +51,6 @@
     <string name="scored_mark">Scored Mark</string>
     <string name="total_marks">Total Marks</string>
     <string name="weight_equals">Weight:</string>
+    <string name="subject_mark">Subject Mark</string>
 
 </resources>

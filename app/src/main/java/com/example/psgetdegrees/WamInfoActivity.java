@@ -7,7 +7,7 @@ import android.os.Bundle;
 
 public class WamInfoActivity extends AppCompatActivity {
 
-   private Toolbar toolbar;
+    private Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
