@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">PsGetDegrees</string>
+    <string name="app_name">P\'sGetDegrees</string>
     <string name="unit_code">Unit Code</string>
     <string name="unit_name">Unit Name</string>
     <string name="calculate_wam">Calculate WAM</string>
@@ -52,5 +52,14 @@
     <string name="total_marks">Total Marks</string>
     <string name="weight_equals">Weight:</string>
     <string name="subject_mark">Subject Mark</string>
+    <string name="year_level">Year Level</string>
+    <string name="weighting">Weighting</string>
+    <string name="first_year_undergraduate">First year (undergraduate)</string>
+    <string name="_0_5">0.5</string>
+    <string name="all_other_year_levels">All other year levels</string>
+    <string name="_1_0">1.0</string>
+    <string name="wam">WAM</string>
+    <string name="equal">=</string>
+    <string name="weight">Weight</string>
 
 </resources>

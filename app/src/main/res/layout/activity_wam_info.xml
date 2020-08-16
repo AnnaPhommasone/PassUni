@@ -56,16 +56,27 @@
             android:id="@+id/tv_wam_equals"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
             android:layout_marginTop="32dp"
             android:fontFamily="casual"
             android:padding="14dp"
-            android:text="@string/wam_equals"
+            android:text="@string/wam"
             android:textColor="@android:color/black"
             android:textSize="18sp"
-            app:layout_constraintEnd_toStartOf="@+id/guideline3"
-            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_formula_title" />
+
+        <TextView
+            android:id="@+id/tv_equal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="casual"
+            android:padding="10dp"
+            android:text="@string/equal"
+            android:textColor="@android:color/black"
+            android:textSize="24sp"
+            app:layout_constraintBaseline_toBaselineOf="@+id/tv_wam_equals"
+            app:layout_constraintStart_toEndOf="@+id/tv_wam_equals" />
 
         <TextView
             android:id="@+id/sigma"
@@ -94,9 +105,10 @@
             android:id="@+id/line"
             android:layout_width="250dp"
             android:layout_height="1dp"
+            android:layout_marginStart="16dp"
             android:background="@android:color/black"
-            app:layout_constraintBaseline_toBaselineOf="@+id/tv_wam_equals"
-            app:layout_constraintStart_toStartOf="@+id/guideline3" />
+            app:layout_constraintBaseline_toBaselineOf="@+id/tv_equal"
+            app:layout_constraintStart_toEndOf="@+id/tv_equal" />
 
         <TextView
             android:id="@+id/sigma2"
@@ -135,34 +147,88 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/wam_denominator" />
 
-        <TextView
-            android:id="@+id/tv_weightings_1"
+        <TableLayout
+            android:id="@+id/weightings_table"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="14dp"
-            android:text="@string/weightings_1"
-            android:textColor="@android:color/black"
-            android:textSize="16sp"
+            android:layout_below="@+id/tv_weightings_title"
+            android:layout_marginTop="8dp"
+            android:background="#E3E4E4"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_weightings_title" />
+            app:layout_constraintTop_toBottomOf="@+id/tv_weightings_title">
 
-        <TextView
-            android:id="@+id/tv_weightings_2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="14dp"
-            android:text="@string/weightings_2"
-            android:textColor="@android:color/black"
-            android:textSize="16sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_weightings_1" />
+            <TableRow
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
 
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.27" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="8dp"
+                    android:text="@string/year_level"
+                    android:textColor="@android:color/black"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="8dp"
+                    android:text="@string/weighting"
+                    android:textColor="@android:color/black"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+            </TableRow>
+
+            <TableRow>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="1dp"
+                    android:background="#FFFFFF"
+                    android:padding="8dp"
+                    android:text="@string/first_year_undergraduate"
+                    android:textColor="@android:color/black"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="1dp"
+                    android:background="#FFFFFF"
+                    android:padding="8dp"
+                    android:text="@string/_0_5"
+                    android:textColor="@android:color/black"
+                    android:textSize="18sp" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="1dp"
+                    android:background="#FFFFFF"
+                    android:padding="8dp"
+                    android:text="@string/all_other_year_levels"
+                    android:textColor="@android:color/black"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="1dp"
+                    android:background="#FFFFFF"
+                    android:padding="8dp"
+                    android:text="@string/_1_0"
+                    android:textColor="@android:color/black"
+                    android:textSize="18sp" />
+            </TableRow>
+        </TableLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

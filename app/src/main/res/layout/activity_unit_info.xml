@@ -43,7 +43,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="casual"
-            android:padding="14dp"
+            android:padding="10dp"
             android:text="@string/subject_mark_equal"
             android:textColor="@android:color/black"
             android:textSize="16sp"
@@ -56,7 +56,7 @@
             android:layout_height="wrap_content"
             android:text="@string/sigma"
             android:textColor="@android:color/black"
-            android:textSize="40sp"
+            android:textSize="33sp"
             app:layout_constraintStart_toEndOf="@+id/tv_subject_mark_equals"
             app:layout_constraintTop_toTopOf="@+id/tv_subject_mark_equals" />
 
@@ -66,9 +66,9 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="4dp"
             android:fontFamily="casual"
-            android:text="Weight"
+            android:text="@string/weight"
             android:textColor="@android:color/black"
-            android:textSize="18sp"
+            android:textSize="16sp"
             app:layout_constraintBottom_toTopOf="@+id/line"
             app:layout_constraintStart_toStartOf="@+id/line" />
 
@@ -76,7 +76,7 @@
             android:id="@+id/line"
             android:layout_width="70dp"
             android:layout_height="1dp"
-            android:layout_marginStart="8dp"
+            android:layout_marginStart="4dp"
             android:background="@android:color/black"
             app:layout_constraintBaseline_toBaselineOf="@+id/tv_subject_mark_equals"
             app:layout_constraintStart_toEndOf="@+id/sigma" />
@@ -89,7 +89,7 @@
             android:fontFamily="casual"
             android:text="@string/hundred"
             android:textColor="@android:color/black"
-            android:textSize="18sp"
+            android:textSize="16sp"
             app:layout_constraintStart_toStartOf="@+id/line"
             app:layout_constraintTop_toBottomOf="@+id/line" />
 
@@ -97,12 +97,12 @@
             android:id="@+id/tv_multiply"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
+            android:layout_marginStart="4dp"
             android:fontFamily="casual"
             android:text="@string/x"
             android:textColor="@android:color/black"
             android:textSize="26sp"
-            app:layout_constraintBaseline_toBaselineOf="@+id/sigma"
+            app:layout_constraintBaseline_toBaselineOf="@+id/tv_subject_mark_equals"
             app:layout_constraintStart_toEndOf="@+id/line" />
 
         <TextView
@@ -113,7 +113,7 @@
             android:fontFamily="casual"
             android:text="@string/scored_mark"
             android:textColor="@android:color/black"
-            android:textSize="18sp"
+            android:textSize="16sp"
             app:layout_constraintBottom_toTopOf="@+id/line2"
             app:layout_constraintStart_toStartOf="@+id/line2" />
 
@@ -121,7 +121,7 @@
             android:id="@+id/line2"
             android:layout_width="120dp"
             android:layout_height="1dp"
-            android:layout_marginStart="8dp"
+            android:layout_marginStart="4dp"
             android:background="@android:color/black"
             app:layout_constraintBaseline_toBaselineOf="@+id/tv_subject_mark_equals"
             app:layout_constraintStart_toEndOf="@+id/tv_multiply" />
@@ -134,7 +134,7 @@
             android:fontFamily="casual"
             android:text="@string/total_marks"
             android:textColor="@android:color/black"
-            android:textSize="18sp"
+            android:textSize="16sp"
             app:layout_constraintStart_toStartOf="@+id/line2"
             app:layout_constraintTop_toBottomOf="@+id/line2" />
     </androidx.constraintlayout.widget.ConstraintLayout>
