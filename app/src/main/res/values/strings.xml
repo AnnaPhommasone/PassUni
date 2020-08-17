@@ -61,5 +61,9 @@
     <string name="wam">WAM</string>
     <string name="equal">=</string>
     <string name="weight">Weight</string>
+    <string name="clear_assessments">Clear Assessments</string>
+    <string name="clear_subject_mark">Clear Subject Mark</string>
+    <string name="clear_wam">Clear WAM</string>
+    <string name="clear_subjects">Clear Subjects</string>
 
 </resources>

@@ -125,6 +125,9 @@ public class Fragment2 extends Fragment implements DeleteListener, AssessmentDia
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
+            case R.id.action_clear_mark:
+                tvUnitMark.setText("");
+                return true;
             case R.id.action_del_assess:
                 assessmentViewModel.deleteAll();
                 return true;

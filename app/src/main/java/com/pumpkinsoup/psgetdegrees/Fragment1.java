@@ -123,6 +123,9 @@ public class Fragment1 extends Fragment implements DeleteListener, UnitDialog.Un
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
+            case R.id.action_clear_wam:
+                tvWam.setText("");
+                return true;
             case R.id.action_del_units:
                 unitViewModel.deleteAll();
                 return true;

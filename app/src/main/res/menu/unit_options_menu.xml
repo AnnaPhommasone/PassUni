@@ -15,7 +15,11 @@
         app:showAsAction="ifRoom" />
 
     <item
+        android:id="@+id/action_clear_mark"
+        android:title="@string/clear_subject_mark" />
+
+    <item
         android:id="@+id/action_del_assess"
-        android:title="@string/delete_assessments" />
+        android:title="@string/clear_assessments" />
 
 </menu>

@@ -15,7 +15,11 @@
         app:showAsAction="ifRoom" />
 
     <item
+        android:id="@+id/action_clear_wam"
+        android:title="@string/clear_wam" />
+
+    <item
         android:id="@+id/action_del_units"
-        android:title="@string/delete_all_units" />
+        android:title="@string/clear_subjects" />
 
 </menu>
