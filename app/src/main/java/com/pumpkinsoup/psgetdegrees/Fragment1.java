@@ -174,7 +174,6 @@ public class Fragment1 extends Fragment implements DeleteListener, UnitDialog.Un
         }
     }
 
-    // Deletes the Unit identified by the given unique ID
     @Override
     public void onClickDel(int id, String name) {
         unitViewModel.deleteById(id);

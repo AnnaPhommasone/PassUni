@@ -42,6 +42,7 @@
             android:id="@+id/tv_subject_mark_equals"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
             android:fontFamily="casual"
             android:padding="10dp"
             android:text="@string/subject_mark_equal"

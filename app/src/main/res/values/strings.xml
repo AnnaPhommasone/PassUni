@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">P\'sGetDegrees</string>
+    <string name="app_name">PassUni</string>
     <string name="unit_code">Unit Code</string>
     <string name="unit_name">Unit Name</string>
     <string name="calculate_wam">Calculate WAM</string>
