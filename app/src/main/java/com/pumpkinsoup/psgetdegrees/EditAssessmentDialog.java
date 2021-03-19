@@ -58,8 +58,8 @@ public class EditAssessmentDialog extends AppCompatDialogFragment {
 
         etAssessmentName = view.findViewById(R.id.et_assessment_name);
         etValue = view.findViewById(R.id.et_value);
-        etMarkNum = view.findViewById(R.id.et_mark_numerator);
-        etMarkDen = view.findViewById(R.id.et_mark_denominator);
+        etMarkNum = view.findViewById(R.id.et_student_mark);
+        etMarkDen = view.findViewById(R.id.et_total_assessment_marks);
 
         id = getArguments().getInt(ASSESSMENT_ID_KEY);
         etAssessmentName.setText(getArguments().getString(ASSESSMENT_NAME_KEY));

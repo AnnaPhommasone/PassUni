@@ -18,21 +18,19 @@ import java.util.List;
 public class SubjectRecyclerAdapter extends RecyclerView.Adapter<SubjectRecyclerAdapter.ViewHolder>{
 
     private ArrayList<Subject> data;
-    private SubjectViewModel unitViewModel;
     private DeleteListener deleteListener;
-    private EditSubjectListener editUnitListener;
+    private EditSubjectListener editSubjectListener;
 
-    public SubjectRecyclerAdapter(List<Subject> data, SubjectViewModel unitViewModel) {
+    public SubjectRecyclerAdapter(List<Subject> data) {
         this.data = (ArrayList<Subject>) data;
-        this.unitViewModel = unitViewModel;
     }
 
     public void setDeleteListener(DeleteListener callBack) {
         this.deleteListener = callBack;
     }
 
-    public void setEditUnitListener(EditSubjectListener callBack) {
-        this.editUnitListener = callBack;
+    public void setEditSubjectListener(EditSubjectListener callBack) {
+        this.editSubjectListener = callBack;
     }
 
     public void setData(ArrayList<Subject> data) {
@@ -50,7 +48,7 @@ public class SubjectRecyclerAdapter extends RecyclerView.Adapter<SubjectRecycler
 
     @Override
     public void onBindViewHolder(@NonNull SubjectRecyclerAdapter.ViewHolder holder, int position) {
-        holder.tvUnitName.setText(data.get(position).getSubjectName());
+        holder.tvSubjectName.setText(data.get(position).getSubjectName());
         holder.tvYearLevel.setText(data.get(position).getYearLevel());
         holder.tvCreditPoints.setText(data.get(position).getCreditPoints());
         holder.tvMark.setText(data.get(position).getMark());
@@ -63,7 +61,7 @@ public class SubjectRecyclerAdapter extends RecyclerView.Adapter<SubjectRecycler
         holder.btnEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                editUnitListener.onClickEditSubject(data.get(position), position);
+                editSubjectListener.onClickEditSubject(data.get(position), position);
             }
         });
     }
@@ -74,7 +72,7 @@ public class SubjectRecyclerAdapter extends RecyclerView.Adapter<SubjectRecycler
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        public TextView tvUnitName;
+        public TextView tvSubjectName;
         public TextView tvYearLevel;
         public TextView tvCreditPoints;
         public TextView tvMark;
@@ -83,7 +81,7 @@ public class SubjectRecyclerAdapter extends RecyclerView.Adapter<SubjectRecycler
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            tvUnitName = itemView.findViewById(R.id.tv_unit_name);
+            tvSubjectName = itemView.findViewById(R.id.tv_subject_name);
             tvYearLevel = itemView.findViewById(R.id.tv_year_level_val);
             tvCreditPoints = itemView.findViewById(R.id.tv_credit_val);
             tvMark = itemView.findViewById(R.id.tv_mark_val);

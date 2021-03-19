@@ -10,7 +10,6 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.pumpkinsoup.psgetdegrees.AssessmentProvider.Assessment;
-import com.pumpkinsoup.psgetdegrees.AssessmentProvider.AssessmentViewModel;
 
 import java.util.ArrayList;
 
@@ -20,13 +19,11 @@ import java.util.ArrayList;
 public class AssessmentRecyclerAdapter extends RecyclerView.Adapter<AssessmentRecyclerAdapter.ViewHolder> {
 
     private ArrayList<Assessment> data;
-    private AssessmentViewModel aViewModel;
     private DeleteListener deleteListener;
     private EditAssessmentListener editAssessmentListener;
 
-    public AssessmentRecyclerAdapter(ArrayList<Assessment> data, AssessmentViewModel aViewModel) {
+    public AssessmentRecyclerAdapter(ArrayList<Assessment> data) {
         this.data = data;
-        this.aViewModel = aViewModel;
     }
 
     public void setDeleteListener(DeleteListener callBack) {
@@ -77,8 +74,8 @@ public class AssessmentRecyclerAdapter extends RecyclerView.Adapter<AssessmentRe
             super(itemView);
             tvAssessmentName = itemView.findViewById(R.id.tv_assessment_name);
             tvValue = itemView.findViewById(R.id.tv_value_val);
-            tvMarkNum = itemView.findViewById(R.id.tv_mark_numerator);
-            tvMarkDen = itemView.findViewById(R.id.tv_mark_denominator);
+            tvMarkNum = itemView.findViewById(R.id.tv_student_mark);
+            tvMarkDen = itemView.findViewById(R.id.tv_total_marks);
             btnDel = itemView.findViewById(R.id.btn_del);
             btnEdit = itemView.findViewById(R.id.btn_edit_assessment);
         }

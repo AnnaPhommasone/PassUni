@@ -35,7 +35,7 @@
         android:textSize="18sp" />
 
     <EditText
-        android:id="@+id/et_mark_numerator"
+        android:id="@+id/et_student_mark"
         android:layout_width="70dp"
         android:layout_height="wrap_content"
         android:ems="10"
@@ -50,12 +50,12 @@
         android:layout_below="@+id/et_value"
         android:layout_marginStart="0dp"
         android:layout_marginTop="3dp"
-        android:layout_toEndOf="@+id/et_mark_numerator"
+        android:layout_toEndOf="@+id/et_student_mark"
         android:text="@string/slash"
         android:textSize="30sp" />
 
     <EditText
-        android:id="@+id/et_mark_denominator"
+        android:id="@+id/et_total_assessment_marks"
         android:layout_width="70dp"
         android:layout_height="wrap_content"
         android:ems="10"

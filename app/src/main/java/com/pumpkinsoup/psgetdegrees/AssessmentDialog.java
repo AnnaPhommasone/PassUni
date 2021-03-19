@@ -21,8 +21,8 @@ public class AssessmentDialog extends AppCompatDialogFragment {
 
     private EditText etAssessmentName;
     private EditText etValue;
-    private EditText etMarkNum;
-    private EditText etMarkDen;
+    private EditText etStudentMark;
+    private EditText etTotalAssessmentMarks;
     private AssessmentDialogListener listener;
 
     @NonNull
@@ -39,14 +39,14 @@ public class AssessmentDialog extends AppCompatDialogFragment {
                 .setPositiveButton("Add", (dialog, which) -> {
                     String assessmentName = etAssessmentName.getText().toString();
                     String value = etValue.getText().toString();
-                    String markNum = etMarkNum.getText().toString();
-                    String markDen = etMarkDen.getText().toString();
-                    listener.addAssessment(assessmentName, value, markNum, markDen);
+                    String studentMark = etStudentMark.getText().toString();
+                    String totalAssessmentMarks = etTotalAssessmentMarks.getText().toString();
+                    listener.addAssessment(assessmentName, value, studentMark, totalAssessmentMarks);
                 });
         etAssessmentName = view.findViewById(R.id.et_assessment_name);
         etValue = view.findViewById(R.id.et_value);
-        etMarkNum = view.findViewById(R.id.et_mark_numerator);
-        etMarkDen = view.findViewById(R.id.et_mark_denominator);
+        etStudentMark = view.findViewById(R.id.et_student_mark);
+        etTotalAssessmentMarks = view.findViewById(R.id.et_total_assessment_marks);
         return builder.create();
     }
 
@@ -62,6 +62,6 @@ public class AssessmentDialog extends AppCompatDialogFragment {
     }
 
     public interface AssessmentDialogListener {
-        void addAssessment(String assessmentName, String value, String markNum, String markDen);
+        void addAssessment(String assessmentName, String value, String studentMark, String totalAssessmentMarks);
     }
 }

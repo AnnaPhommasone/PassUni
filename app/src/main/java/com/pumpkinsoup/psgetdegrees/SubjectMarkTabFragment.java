@@ -69,7 +69,7 @@ public class SubjectMarkTabFragment extends Fragment implements DeleteListener, 
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         assessments = new ArrayList<>();
-        recyclerAdapter = new AssessmentRecyclerAdapter(assessments, assessmentViewModel);
+        recyclerAdapter = new AssessmentRecyclerAdapter(assessments);
         recyclerAdapter.setDeleteListener(this);
         recyclerAdapter.setEditAssessmentListener(this);
         recyclerView = view.findViewById(R.id.recycler_view_assessments);
@@ -149,12 +149,12 @@ public class SubjectMarkTabFragment extends Fragment implements DeleteListener, 
     }
 
     @Override
-    public void addAssessment(String assessmentName, String value, String markNum, String markDen) {
-        if (correctInputs(value, markNum, markDen)) {
+    public void addAssessment(String assessmentName, String value, String studentMark, String totalAssessmentMarks) {
+        if (correctInputs(value, studentMark, totalAssessmentMarks)) {
             if (assessmentName.length() == 0) {
                 assessmentName = "Assessment #" + (recyclerAdapter.getItemCount() + 1);
             }
-            Assessment assessment = new Assessment(assessmentName, value, markNum, markDen);
+            Assessment assessment = new Assessment(assessmentName, value, studentMark, totalAssessmentMarks);
             assessmentViewModel.insert(assessment);
             Toast.makeText(getActivity(), assessmentName + " added", Toast.LENGTH_SHORT).show();
         }

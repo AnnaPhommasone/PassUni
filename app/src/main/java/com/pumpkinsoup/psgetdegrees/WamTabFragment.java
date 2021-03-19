@@ -67,9 +67,9 @@ public class WamTabFragment extends Fragment implements DeleteListener, SubjectD
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         subjects = new ArrayList<>();
-        recyclerAdapter = new SubjectRecyclerAdapter(subjects, subjectViewModel);
+        recyclerAdapter = new SubjectRecyclerAdapter(subjects);
         recyclerAdapter.setDeleteListener(this);
-        recyclerAdapter.setEditUnitListener(this);
+        recyclerAdapter.setEditSubjectListener(this);
         recyclerView = view.findViewById(R.id.recycler_view_subjects);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setAdapter(recyclerAdapter);
