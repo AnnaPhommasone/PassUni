@@ -1,4 +1,4 @@
-package com.pumpkinsoup.psgetdegrees.assessmentProvider;
+package com.pumpkinsoup.psgetdegrees.AssessmentProvider;
 
 import android.provider.BaseColumns;
 
@@ -7,7 +7,7 @@ import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
-import static com.pumpkinsoup.psgetdegrees.assessmentProvider.Assessment.TABLE_NAME;
+import static com.pumpkinsoup.psgetdegrees.AssessmentProvider.Assessment.TABLE_NAME;
 
 @Entity(tableName = TABLE_NAME)
 public class Assessment {

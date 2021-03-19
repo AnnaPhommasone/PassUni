@@ -3,19 +3,40 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".Fragment2">
+    android:layout_height="match_parent">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycler_view2"
+        android:id="@+id/recycler_view"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginBottom="110dp"
+        android:layout_marginBottom="55dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0" />
+
+    <Button
+        android:id="@+id/btn_calculate_wam"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:text="@string/calculate_wam"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/ver_gl_1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/recycler_view" />
+
+    <TextView
+        android:id="@+id/tv_wam"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:autoSizeTextType="uniform"
+        android:textColor="@android:color/black"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/ver_gl_1"
+        app:layout_constraintTop_toBottomOf="@+id/recycler_view" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/ver_gl_1"
@@ -23,33 +44,5 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.5" />
-
-    <Button
-        android:id="@+id/btn_calculate_mark"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:text="@string/calculate_unit_mark"
-        app:layout_constraintBottom_toTopOf="@+id/hor_gl_1"
-        app:layout_constraintEnd_toStartOf="@+id/ver_gl_1"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/recycler_view2" />
-
-    <TextView
-        android:id="@+id/tv_unit_mark"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:autoSizeTextType="uniform"
-        android:textColor="@android:color/black"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/ver_gl_1"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_calculate_mark" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/hor_gl_1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_end="55dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

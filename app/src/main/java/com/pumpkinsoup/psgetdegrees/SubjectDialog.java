@@ -14,36 +14,35 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatDialogFragment;
 
-public class UnitDialog extends AppCompatDialogFragment {
+public class SubjectDialog extends AppCompatDialogFragment {
 
     private EditText etUnitName;
     private RadioGroup radioGroup;
     private RadioButton radioButton;
     private EditText etCreditPoints;
     private EditText etMark;
-    private UnitDialogListener listener;
+    private SubjectDialogListener listener;
 
     @NonNull
     @Override
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         LayoutInflater inflater = getActivity().getLayoutInflater();
-        View view = inflater.inflate(R.layout.layout_unit_dialog, null);
+        View view = inflater.inflate(R.layout.dialog_subject_details, null);
         builder.setView(view)
                 .setTitle("Add a new subject")
                 .setNegativeButton("Cancel", (dialog, which) -> {
 
                 })
                 .setPositiveButton("Add", (dialog, which) -> {
-                    // find which radio btn was clicked
                     int radioId = radioGroup.getCheckedRadioButtonId();
                     radioButton = view.findViewById(radioId);
 
-                    String unitName = etUnitName.getText().toString();
+                    String subjectName = etUnitName.getText().toString();
                     String yearLevel = radioButton.getText().toString();
                     String creditPts = etCreditPoints.getText().toString();
                     String mark = etMark.getText().toString();
-                    listener.addUnit(unitName, yearLevel, creditPts, mark);
+                    listener.addSubject(subjectName, yearLevel, creditPts, mark);
                 });
 
         etUnitName = view.findViewById(R.id.et_unit_name);
@@ -58,15 +57,15 @@ public class UnitDialog extends AppCompatDialogFragment {
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
         try {
-            listener = (UnitDialogListener) getTargetFragment();
+            listener = (SubjectDialogListener) getTargetFragment();
         } catch (Exception e) {
             throw new ClassCastException(context.toString() +
                     "must implement UnitDialogListener");
         }
     }
 
-    public interface UnitDialogListener {
-        void addUnit(String unitName, String yearLevel, String creditPoints, String mark);
+    public interface SubjectDialogListener {
+        void addSubject(String unitName, String yearLevel, String creditPoints, String mark);
     }
 
 }

@@ -12,6 +12,11 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatDialogFragment;
 
+/**
+ *  An AppCompatDialogFragment which represents a pop-up dialog box.
+ *  The pop-up box allows users to input the details of an assessment for a subject,
+ *  including the name, weighting, mark, and total marks for that assessment.
+ */
 public class AssessmentDialog extends AppCompatDialogFragment {
 
     private EditText etAssessmentName;
@@ -25,7 +30,7 @@ public class AssessmentDialog extends AppCompatDialogFragment {
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         LayoutInflater inflater = getActivity().getLayoutInflater();
-        View view = inflater.inflate(R.layout.layout_assessment_dialog, null);
+        View view = inflater.inflate(R.layout.dialog_assessment_details, null);
         builder.setView(view)
                 .setTitle("Add a new assessment")
                 .setNegativeButton("Cancel", (dialog, which) -> {

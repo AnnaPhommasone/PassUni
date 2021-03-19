@@ -14,8 +14,12 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatDialogFragment;
 
-import com.pumpkinsoup.psgetdegrees.unitProvider.Unit;
+import com.pumpkinsoup.psgetdegrees.SubjectProvider.Subject;
 
+/**
+ * An AppCompatDialogFragment which represents a pop-up dialog box for allowing users to edit
+ * subjects they have already created on the first tab (WAM tab).
+ */
 public class EditSubjectDialog extends AppCompatDialogFragment {
 
     public static final String SUBJECT_ID = "subjectId";
@@ -38,14 +42,13 @@ public class EditSubjectDialog extends AppCompatDialogFragment {
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         LayoutInflater inflater = getActivity().getLayoutInflater();
-        View view = inflater.inflate(R.layout.layout_unit_dialog, null);
+        View view = inflater.inflate(R.layout.dialog_subject_details, null);
         builder.setView(view)
-                .setTitle("Edit unit")
+                .setTitle("Edit subject")
                 .setNegativeButton("Cancel", (dialog, which) -> {
 
                 })
                 .setPositiveButton("Edit", (dialog, which) -> {
-                    // find which radio btn was clicked
                     int radioId = radioGroup.getCheckedRadioButtonId();
                     radioButton = view.findViewById(radioId);
 
@@ -88,11 +91,11 @@ public class EditSubjectDialog extends AppCompatDialogFragment {
         }
     }
 
-    public EditSubjectDialog newInstance(Unit unit, int position) {
+    public EditSubjectDialog newInstance(Subject unit, int position) {
         EditSubjectDialog dialog = new EditSubjectDialog();
         Bundle args = new Bundle();
         args.putInt(SUBJECT_ID, unit.getId());
-        args.putString(SUBJECT_NAME_KEY, unit.getUnitName());
+        args.putString(SUBJECT_NAME_KEY, unit.getSubjectName());
         args.putString(YEAR_LEVEL_KEY, unit.getYearLevel());
         args.putString(CREDIT_POINTS_KEY, unit.getCreditPoints());
         args.putString(MARK_KEY, unit.getMark());

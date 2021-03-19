@@ -24,9 +24,9 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.pumpkinsoup.psgetdegrees.unitProvider.Unit;
-import com.pumpkinsoup.psgetdegrees.unitProvider.UnitValue;
-import com.pumpkinsoup.psgetdegrees.unitProvider.UnitViewModel;
+import com.pumpkinsoup.psgetdegrees.SubjectProvider.Subject;
+import com.pumpkinsoup.psgetdegrees.SubjectProvider.SubjectValue;
+import com.pumpkinsoup.psgetdegrees.SubjectProvider.SubjectViewModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,51 +36,50 @@ import java.util.List;
  * A fragment for the first tab. It calculates a WAM (weighted average mark) based on the
  * given units from the user.
  */
-public class Fragment1 extends Fragment implements DeleteListener, UnitDialog.UnitDialogListener,
-        EditUnitListener, EditSubjectDialog.EditSubjectDialogListener {
+public class WamTabFragment extends Fragment implements DeleteListener, SubjectDialog.SubjectDialogListener,
+        EditSubjectListener, EditSubjectDialog.EditSubjectDialogListener {
 
     public static final String WAM_KEY = "wam";
     private int currentId;
     private RecyclerView recyclerView;
-    private UnitRecyclerAdapter recyclerAdapter;
-    private Button btnCalcWam;
+    private SubjectRecyclerAdapter recyclerAdapter;
+    private Button btnCalculateWam;
     private TextView tvWam;
-    private ArrayList<Unit> units;
-    private UnitViewModel unitViewModel;
+    private ArrayList<Subject> subjects;
+    private SubjectViewModel subjectViewModel;
 
-    public Fragment1() {}
+    public WamTabFragment() {}
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
-        unitViewModel = new ViewModelProvider(this).get(UnitViewModel.class);
+        subjectViewModel = new ViewModelProvider(this).get(SubjectViewModel.class);
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment1_layout, container, false);
+        return inflater.inflate(R.layout.fragment_wam, container, false);
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        units = new ArrayList<>();
-        recyclerAdapter = new UnitRecyclerAdapter(units, unitViewModel);
+        subjects = new ArrayList<>();
+        recyclerAdapter = new SubjectRecyclerAdapter(subjects, subjectViewModel);
         recyclerAdapter.setDeleteListener(this);
         recyclerAdapter.setEditUnitListener(this);
         recyclerView = view.findViewById(R.id.recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setAdapter(recyclerAdapter);
 
-        unitViewModel.getAllUnits().observe(getViewLifecycleOwner(), newData -> {
-            recyclerAdapter.setData((ArrayList<Unit>) newData);
+        subjectViewModel.getAllSubjects().observe(getViewLifecycleOwner(), newData -> {
+            recyclerAdapter.setData((ArrayList<Subject>) newData);
         });
 
-        btnCalcWam = view.findViewById(R.id.btn_calculate_wam);
-        btnCalcWam.setOnClickListener(v -> new CalculateWam().execute());
+        btnCalculateWam = view.findViewById(R.id.btn_calculate_wam);
+        btnCalculateWam.setOnClickListener(v -> new CalculateWam().execute());
         tvWam = view.findViewById(R.id.tv_wam);
     }
 
@@ -127,10 +126,10 @@ public class Fragment1 extends Fragment implements DeleteListener, UnitDialog.Un
                 tvWam.setText("");
                 return true;
             case R.id.action_del_units:
-                unitViewModel.deleteAll();
+                subjectViewModel.deleteAll();
                 return true;
             case R.id.action_add_unit:
-                openDialog();
+                openNewSubjectDialogBox();
                 return true;
             case R.id.action_info_wam:
                 Intent intent = new Intent(getContext(), WamInfoActivity.class);
@@ -141,48 +140,47 @@ public class Fragment1 extends Fragment implements DeleteListener, UnitDialog.Un
     }
 
     @Override
-    public void addUnit(String unitName, String yearLevel, String creditPoints, String mark) {
-        if (unitDetailsCorrect(creditPoints, mark)) {
+    public void addSubject(String unitName, String yearLevel, String creditPoints, String mark) {
+        if (isSubjectDetailsCorrect(creditPoints, mark)) {
             if (unitName.length() == 0) {
                 unitName = "Subject #" + (recyclerAdapter.getItemCount() + 1);
             }
-            Unit unit = new Unit(unitName, yearLevel, creditPoints, mark);
-            unitViewModel.insert(unit);
+            Subject unit = new Subject(unitName, yearLevel, creditPoints, mark);
+            subjectViewModel.insert(unit);
             Toast.makeText(getActivity(), unitName + " Added", Toast.LENGTH_SHORT).show();
         }
     }
 
     @Override
-    public void onClickEdit(Unit unit, int position) {
+    public void onClickEditSubject(Subject subject, int position) {
         EditSubjectDialog dialog = new EditSubjectDialog();
-        EditSubjectDialog dialogInstance = dialog.newInstance(unit, position);
-        dialogInstance.setTargetFragment(Fragment1.this, 1);
+        EditSubjectDialog dialogInstance = dialog.newInstance(subject, position);
+        dialogInstance.setTargetFragment(WamTabFragment.this, 1);
         dialogInstance.show(getActivity().getSupportFragmentManager(), "EditSubjectDialog");
     }
 
     @Override
     public void editSubject(int id, String subjectName, String yearLevel, String creditPoints, String mark,
                             int position) {
-        if (unitDetailsCorrect(creditPoints, mark)) {
+        if (isSubjectDetailsCorrect(creditPoints, mark)) {
             if (subjectName.length() == 0) {
                 subjectName = "Subject #" + (position + 1);
             }
             currentId = id;
-            Unit unit = new Unit(subjectName, yearLevel, creditPoints, mark);
-            new UpdateUnit().execute(unit);
-            Toast.makeText(getActivity(), subjectName + " Edited", Toast.LENGTH_SHORT).show();
+            Subject unit = new Subject(subjectName, yearLevel, creditPoints, mark);
+            new UpdateSubject().execute(unit);
+            Toast.makeText(getActivity(), subjectName + " edited", Toast.LENGTH_SHORT).show();
         }
     }
 
     @Override
     public void onClickDel(int id, String name) {
-        unitViewModel.deleteById(id);
+        subjectViewModel.deleteById(id);
         recyclerAdapter.notifyDataSetChanged();
-        Toast.makeText(getActivity(), name + " Deleted", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getActivity(), name + " deleted", Toast.LENGTH_SHORT).show();
     }
 
-    // Checks if the given unit details satisfy conditions.
-    private boolean unitDetailsCorrect(String creditPoints, String mark) {
+    private boolean isSubjectDetailsCorrect(String creditPoints, String mark) {
         if (creditPoints.length() == 0 || mark.length() == 0) {
             Toast.makeText(getActivity(), "Invalid Input", Toast.LENGTH_LONG).show();
             return false;
@@ -194,28 +192,22 @@ public class Fragment1 extends Fragment implements DeleteListener, UnitDialog.Un
         return true;
     }
 
-    // Opens a custom dialog for users to enter in the new unit's details.
-    private void openDialog() {
-        UnitDialog unitDialog = new UnitDialog();
-        unitDialog.setTargetFragment(Fragment1.this, 1);
-        unitDialog.show(getActivity().getSupportFragmentManager(), "UnitDialog");
+    private void openNewSubjectDialogBox() {
+        SubjectDialog subjectDialog = new SubjectDialog();
+        subjectDialog.setTargetFragment(WamTabFragment.this, 1);
+        subjectDialog.show(getActivity().getSupportFragmentManager(), "SubjectDialog");
     }
 
-    // Uses the background thread to retrieve the Unit details from the units database,
-    // and calculates the WAM based on the Units that have been added to the database.
-    // Populates the text view with the calculated WAM.
     private class CalculateWam extends AsyncTask<Void, Void, Float> {
-
-        // Calculates the WAM.
         @Override
         protected Float doInBackground(Void... params) {
             float wam = 0.0f;
             try {
-                List<UnitValue> rows = unitViewModel.getUnitValues();
+                List<SubjectValue> rows = subjectViewModel.getSubjectValues();
                 if (rows.size() > 0) {
                     float sumWeightedMarks = 0.0f;
                     float sumWeightedCreditPoints = 0.0f;
-                    for (UnitValue row : rows) {
+                    for (SubjectValue row : rows) {
                         String yearLevel = row.yearLevel;
                         int mark = Integer.parseInt(row.mark);
                         int creditPoints = Integer.parseInt(row.creditPoints);
@@ -237,7 +229,6 @@ public class Fragment1 extends Fragment implements DeleteListener, UnitDialog.Un
             return wam;
         }
 
-        // Populates the text view with the calculated, rounded WAM.
         @Override
         protected void onPostExecute(Float wam) {
             super.onPostExecute(wam);
@@ -246,13 +237,12 @@ public class Fragment1 extends Fragment implements DeleteListener, UnitDialog.Un
         }
     }
 
-    private class UpdateUnit extends AsyncTask<Unit, Unit, Void> {
-
+    private class UpdateSubject extends AsyncTask<Subject, Subject, Void> {
         @Override
-        protected Void doInBackground(Unit... units) {
-            Unit unit = units[0];
-            unitViewModel.update(currentId, unit.getUnitName(), unit.getYearLevel(),
-                    unit.getCreditPoints(), unit.getMark());
+        protected Void doInBackground(Subject... subjects) {
+            Subject subject = subjects[0];
+            subjectViewModel.update(currentId, subject.getSubjectName(), subject.getYearLevel(),
+                    subject.getCreditPoints(), subject.getMark());
             return null;
         }
     }

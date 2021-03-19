@@ -12,8 +12,14 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatDialogFragment;
 
-import com.pumpkinsoup.psgetdegrees.assessmentProvider.Assessment;
+import com.pumpkinsoup.psgetdegrees.AssessmentProvider.Assessment;
 
+/**
+ * An AppCompatDialogFragment which represents the pop-up dialog box for editing an assessment
+ * in the second tab (Subject Mark tab).
+ * The pop-up box has the values of the assessment already filled in, and allows users to
+ * edit the values.
+ */
 public class EditAssessmentDialog extends AppCompatDialogFragment {
 
     public static final String ASSESSMENT_ID_KEY = "assessmentId";
@@ -35,7 +41,7 @@ public class EditAssessmentDialog extends AppCompatDialogFragment {
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         LayoutInflater inflater = getActivity().getLayoutInflater();
-        View view = inflater.inflate(R.layout.layout_assessment_dialog, null);
+        View view = inflater.inflate(R.layout.dialog_assessment_details, null);
         builder.setView(view)
                 .setTitle("Edit assessment")
                 .setNegativeButton("Cancel", (dialog, which) -> {

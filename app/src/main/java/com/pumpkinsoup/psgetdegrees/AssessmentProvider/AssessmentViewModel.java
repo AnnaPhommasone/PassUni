@@ -1,4 +1,4 @@
-package com.pumpkinsoup.psgetdegrees.assessmentProvider;
+package com.pumpkinsoup.psgetdegrees.AssessmentProvider;
 
 import android.app.Application;
 
@@ -39,7 +39,7 @@ public class AssessmentViewModel extends AndroidViewModel {
         return repository.getAssessmentValues();
     }
 
-    public void update(int assessmentId, String assessmentName, String value, String markNumerator, String markDenominator) {
-        repository.update(assessmentId, assessmentName, value, markNumerator, markDenominator);
+    public void update(int assessmentId, String assessmentName, String value, String studentMark, String totalMarks) {
+        repository.update(assessmentId, assessmentName, value, studentMark, totalMarks);
     }
 }

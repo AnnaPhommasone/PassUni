@@ -26,10 +26,10 @@ public class MyPagerAdapter extends FragmentPagerAdapter {
         Fragment fragment = null;
         switch (position) {
             case 0:
-                fragment = new Fragment1();
+                fragment = new WamTabFragment();
                 break;
             case 1:
-                fragment = new Fragment2();
+                fragment = new SubjectMarkTabFragment();
                 break;
         }
         return fragment;

@@ -1,4 +1,4 @@
-package com.pumpkinsoup.psgetdegrees.unitProvider;
+package com.pumpkinsoup.psgetdegrees.SubjectProvider;
 
 import android.provider.BaseColumns;
 
@@ -7,20 +7,20 @@ import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
-import static com.pumpkinsoup.psgetdegrees.unitProvider.Unit.TABLE_NAME;
+import static com.pumpkinsoup.psgetdegrees.SubjectProvider.Subject.TABLE_NAME;
 
 @Entity(tableName = TABLE_NAME)
-public class Unit {
-    public static final String TABLE_NAME = "units";
+public class Subject {
+    public static final String TABLE_NAME = "subjects";
     public static final String COLUMN_ID = BaseColumns._ID;
 
     @PrimaryKey(autoGenerate = true)
     @NonNull
-    @ColumnInfo(name = "unitId")
+    @ColumnInfo(name = "subjectId")
     private int id;
 
-    @ColumnInfo(name = "unitName")
-    private String unitName;
+    @ColumnInfo(name = "subjectName")
+    private String subjectName;
 
     @ColumnInfo(name = "yearLevel")
     private String yearLevel;
@@ -31,8 +31,8 @@ public class Unit {
     @ColumnInfo(name = "mark")
     private String mark;
 
-    public Unit(String unitName, String yearLevel, String creditPoints, String mark) {
-        this.unitName = unitName;
+    public Subject(String subjectName, String yearLevel, String creditPoints, String mark) {
+        this.subjectName = subjectName;
         this.yearLevel = yearLevel;
         this.creditPoints = creditPoints;
         this.mark = mark;
@@ -42,8 +42,8 @@ public class Unit {
         return id;
     }
 
-    public String getUnitName() {
-        return unitName;
+    public String getSubjectName() {
+        return subjectName;
     }
 
     public String getYearLevel() {

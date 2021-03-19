@@ -1,4 +1,4 @@
-package com.pumpkinsoup.psgetdegrees.assessmentProvider;
+package com.pumpkinsoup.psgetdegrees.AssessmentProvider;
 
 import androidx.room.ColumnInfo;
 

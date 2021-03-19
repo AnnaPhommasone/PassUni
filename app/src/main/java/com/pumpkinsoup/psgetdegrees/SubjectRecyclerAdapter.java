@@ -9,21 +9,21 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.pumpkinsoup.psgetdegrees.unitProvider.Unit;
-import com.pumpkinsoup.psgetdegrees.unitProvider.UnitViewModel;
+import com.pumpkinsoup.psgetdegrees.SubjectProvider.Subject;
+import com.pumpkinsoup.psgetdegrees.SubjectProvider.SubjectViewModel;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class UnitRecyclerAdapter extends RecyclerView.Adapter<UnitRecyclerAdapter.ViewHolder>{
+public class SubjectRecyclerAdapter extends RecyclerView.Adapter<SubjectRecyclerAdapter.ViewHolder>{
 
-    private ArrayList<Unit> data;
-    private UnitViewModel unitViewModel;
+    private ArrayList<Subject> data;
+    private SubjectViewModel unitViewModel;
     private DeleteListener deleteListener;
-    private EditUnitListener editUnitListener;
+    private EditSubjectListener editUnitListener;
 
-    public UnitRecyclerAdapter(List<Unit> data, UnitViewModel unitViewModel) {
-        this.data = (ArrayList<Unit>) data;
+    public SubjectRecyclerAdapter(List<Subject> data, SubjectViewModel unitViewModel) {
+        this.data = (ArrayList<Subject>) data;
         this.unitViewModel = unitViewModel;
     }
 
@@ -31,39 +31,39 @@ public class UnitRecyclerAdapter extends RecyclerView.Adapter<UnitRecyclerAdapte
         this.deleteListener = callBack;
     }
 
-    public void setEditUnitListener(EditUnitListener callBack) {
+    public void setEditUnitListener(EditSubjectListener callBack) {
         this.editUnitListener = callBack;
     }
 
-    public void setData(ArrayList<Unit> data) {
+    public void setData(ArrayList<Subject> data) {
         this.data = data;
         notifyDataSetChanged();
     }
 
     @NonNull
     @Override
-    public UnitRecyclerAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.unit_card_layout, parent, false);
+    public SubjectRecyclerAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_subject, parent, false);
         ViewHolder viewHolder = new ViewHolder(v);
         return viewHolder;
     }
 
     @Override
-    public void onBindViewHolder(@NonNull UnitRecyclerAdapter.ViewHolder holder, int position) {
-        holder.tvUnitName.setText(data.get(position).getUnitName());
+    public void onBindViewHolder(@NonNull SubjectRecyclerAdapter.ViewHolder holder, int position) {
+        holder.tvUnitName.setText(data.get(position).getSubjectName());
         holder.tvYearLevel.setText(data.get(position).getYearLevel());
         holder.tvCreditPoints.setText(data.get(position).getCreditPoints());
         holder.tvMark.setText(data.get(position).getMark());
         holder.btnDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                deleteListener.onClickDel(data.get(position).getId(), data.get(position).getUnitName());
+                deleteListener.onClickDel(data.get(position).getId(), data.get(position).getSubjectName());
             }
         });
         holder.btnEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                editUnitListener.onClickEdit(data.get(position), position);
+                editUnitListener.onClickEditSubject(data.get(position), position);
             }
         });
     }

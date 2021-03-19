@@ -6,14 +6,14 @@ import androidx.appcompat.widget.Toolbar;
 import android.os.Bundle;
 import android.view.MenuItem;
 
-public class UnitInfoActivity extends AppCompatActivity {
+public class SubjectInfoActivity extends AppCompatActivity {
 
     private Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.drawer_activity_unit_info);
+        setContentView(R.layout.drawer_activity_subject_info);
 
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);

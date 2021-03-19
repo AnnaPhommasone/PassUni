@@ -23,31 +23,31 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.pumpkinsoup.psgetdegrees.assessmentProvider.Assessment;
-import com.pumpkinsoup.psgetdegrees.assessmentProvider.AssessmentValue;
-import com.pumpkinsoup.psgetdegrees.assessmentProvider.AssessmentViewModel;
+import com.pumpkinsoup.psgetdegrees.AssessmentProvider.Assessment;
+import com.pumpkinsoup.psgetdegrees.AssessmentProvider.AssessmentValue;
+import com.pumpkinsoup.psgetdegrees.AssessmentProvider.AssessmentViewModel;
 
 import java.util.ArrayList;
 import java.util.List;
 
 
 /**
- * A fragment that for the second tab. It calculates the unit/subject mark based on the
+ * A fragment for the second tab. It calculates the subject mark based on the
  * given assessments (an assessment has a name, value, and what mark the student got).
  */
-public class Fragment2 extends Fragment implements DeleteListener, AssessmentDialog.AssessmentDialogListener,
+public class SubjectMarkTabFragment extends Fragment implements DeleteListener, AssessmentDialog.AssessmentDialogListener,
         EditAssessmentDialog.EditAssessmentDialogListener, EditAssessmentListener {
 
-    public static final String UNIT_MARK_KEY = "unitMark";
+    public static final String SUBJECT_MARK_KEY = "subjectMark";
     private int assessmentId;
     private RecyclerView recyclerView;
-    private AssessRecyclerAdapter recyclerAdapter;
+    private AssessmentRecyclerAdapter recyclerAdapter;
     private Button btnCalcMark;
-    private TextView tvUnitMark;
+    private TextView tvSubjectMark;
     private ArrayList<Assessment> assessments;
     private AssessmentViewModel assessmentViewModel;
 
-    public Fragment2() {}
+    public SubjectMarkTabFragment() {}
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -62,15 +62,14 @@ public class Fragment2 extends Fragment implements DeleteListener, AssessmentDia
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment2_layout, container, false);
+        return inflater.inflate(R.layout.fragment_subject_mark, container, false);
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         assessments = new ArrayList<>();
-        recyclerAdapter = new AssessRecyclerAdapter(assessments, assessmentViewModel);
+        recyclerAdapter = new AssessmentRecyclerAdapter(assessments, assessmentViewModel);
         recyclerAdapter.setDeleteListener(this);
         recyclerAdapter.setEditAssessmentListener(this);
         recyclerView = view.findViewById(R.id.recycler_view2);
@@ -82,15 +81,15 @@ public class Fragment2 extends Fragment implements DeleteListener, AssessmentDia
         });
 
         btnCalcMark = view.findViewById(R.id.btn_calculate_mark);
-        btnCalcMark.setOnClickListener(v -> new CalculateUnitMark().execute());
-        tvUnitMark = view.findViewById(R.id.tv_unit_mark);
+        btnCalcMark.setOnClickListener(v -> new CalculateSubjectMark().execute());
+        tvSubjectMark = view.findViewById(R.id.tv_unit_mark);
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         if (savedInstanceState != null) {
-            tvUnitMark.setText(savedInstanceState.getString(UNIT_MARK_KEY));
+            tvSubjectMark.setText(savedInstanceState.getString(SUBJECT_MARK_KEY));
         }
     }
 
@@ -98,13 +97,13 @@ public class Fragment2 extends Fragment implements DeleteListener, AssessmentDia
     public void onStart() {
         super.onStart();
         SharedPreferences sP = this.getActivity().getSharedPreferences("Fragment2", Context.MODE_PRIVATE);
-        tvUnitMark.setText(sP.getString(UNIT_MARK_KEY, ""));
+        tvSubjectMark.setText(sP.getString(SUBJECT_MARK_KEY, ""));
     }
 
     @Override
     public void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
-        outState.putString(UNIT_MARK_KEY, tvUnitMark.getText().toString());
+        outState.putString(SUBJECT_MARK_KEY, tvSubjectMark.getText().toString());
     }
 
     @Override
@@ -112,7 +111,7 @@ public class Fragment2 extends Fragment implements DeleteListener, AssessmentDia
         super.onStop();
         SharedPreferences sP = this.getActivity().getSharedPreferences("Fragment2", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sP.edit();
-        editor.putString(UNIT_MARK_KEY, tvUnitMark.getText().toString());
+        editor.putString(SUBJECT_MARK_KEY, tvSubjectMark.getText().toString());
         editor.apply();
     }
 
@@ -126,28 +125,27 @@ public class Fragment2 extends Fragment implements DeleteListener, AssessmentDia
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_clear_mark:
-                tvUnitMark.setText("");
+                tvSubjectMark.setText("");
                 return true;
             case R.id.action_del_assess:
                 assessmentViewModel.deleteAll();
                 return true;
             case R.id.action_add_assess:
-                openDialog();
+                openNewAssessmentDialogBox();
                 return true;
             case R.id.action_info_unit:
-                Intent intent = new Intent(getContext(), UnitInfoActivity.class);
+                Intent intent = new Intent(getContext(), SubjectInfoActivity.class);
                 startActivity(intent);
                 return true;
         }
         return super.onOptionsItemSelected(item);
     }
 
-    // Deletes the Assessment identified by the given unique ID.
     @Override
     public void onClickDel(int id, String name) {
         assessmentViewModel.deleteAssessment(id);
         recyclerAdapter.notifyDataSetChanged();
-        Toast.makeText(getActivity(), name + " Deleted", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getActivity(), name + " deleted", Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -158,21 +156,21 @@ public class Fragment2 extends Fragment implements DeleteListener, AssessmentDia
             }
             Assessment assessment = new Assessment(assessmentName, value, markNum, markDen);
             assessmentViewModel.insert(assessment);
-            Toast.makeText(getActivity(), assessmentName + " Added", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), assessmentName + " added", Toast.LENGTH_SHORT).show();
         }
     }
 
     @Override
-    public void editAssessment(int id, String assessmentName, String value, String markNum,
-                               String markDen, int position) {
-        if (correctInputs(value, markNum, markDen)) {
+    public void editAssessment(int id, String assessmentName, String value, String studentMark,
+                               String totalMarks, int position) {
+        if (correctInputs(value, studentMark, totalMarks)) {
             if (assessmentName.length() == 0) {
                 assessmentName = "Assessment #" + (position + 1);
             }
             assessmentId = id;
-            Assessment assessment = new Assessment(assessmentName, value, markNum, markDen);
+            Assessment assessment = new Assessment(assessmentName, value, studentMark, totalMarks);
             new UpdateAssessment().execute(assessment);
-            Toast.makeText(getActivity(), assessmentName + " Edited", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), assessmentName + " edited", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -180,32 +178,28 @@ public class Fragment2 extends Fragment implements DeleteListener, AssessmentDia
     public void onClickEdit(Assessment assessment, int position) {
         EditAssessmentDialog dialog = new EditAssessmentDialog();
         EditAssessmentDialog diaLogInstance = dialog.newInstance(assessment, position);
-        diaLogInstance.setTargetFragment(Fragment2.this, 1);
+        diaLogInstance.setTargetFragment(SubjectMarkTabFragment.this, 1);
         diaLogInstance.show(getActivity().getSupportFragmentManager(), "EditAssessmentDialog");
     }
 
-    // Opens a custom dialog box for users to enter in the details of the new assessment.
-    private void openDialog() {
+    private void openNewAssessmentDialogBox() {
         AssessmentDialog dialog = new AssessmentDialog();
-        dialog.setTargetFragment(Fragment2.this, 1);
+        dialog.setTargetFragment(SubjectMarkTabFragment.this, 1);
         dialog.show(getActivity().getSupportFragmentManager(), "AssessmentDialog");
     }
 
-    // Checks if value and mark fields are not empty, and value is in 0-100 range.
-    // A student can score higher than the total amount of marks. e.g. 20.5/20 (as I have done b4:) )
-    private boolean correctInputs(String value, String markNum, String markDen) {
-        if (value.length() == 0 || markNum.length() == 0 || markDen.length() == 0) {
+    private boolean correctInputs(String value, String studentMark, String totalMarks) {
+        if (value.length() == 0 || studentMark.length() == 0 || totalMarks.length() == 0) {
             Toast.makeText(getActivity(), "Invalid Input", Toast.LENGTH_LONG).show();
             return false;
         }
         if (Double.parseDouble(value) == 0 || Double.parseDouble(value) > 100) {
-            Toast.makeText(getActivity(), "Value Must Be 1-100", Toast.LENGTH_LONG).show();
+            Toast.makeText(getActivity(), "Value must be range 1-100", Toast.LENGTH_LONG).show();
             return false;
         }
         return true;
     }
 
-    // Checks if sum of values equal to 100 for all assessments.
     private boolean valuesAddTo100() {
         double sumValues = 0.0;
         for (int i = 0; i < assessments.size(); i++) {
@@ -215,23 +209,19 @@ public class Fragment2 extends Fragment implements DeleteListener, AssessmentDia
         return sumValues == 100.0;
     }
 
-    // Uses the background thread to retrieve the given assessment details,
-    // and calculate the unit/subject mark.
-    // After calculating the mark, this class populates the text view with the unit/subject mark.
-    private class CalculateUnitMark extends AsyncTask<Void, Void, Integer> {
-        // Calculates the Subject mark.
+    private class CalculateSubjectMark extends AsyncTask<Void, Void, Integer> {
         @Override
         protected Integer doInBackground(Void... params) {
             Integer overallMark = 0;
             try {
                 List<AssessmentValue> assessmentValues = assessmentViewModel.getAssessmentValues();
-                float unitMark = 0.0f;
+                float subjectMark = 0.0f;
                 for (AssessmentValue a : assessmentValues) {
                     float value = Float.parseFloat(a.value);
                     float mark = Float.parseFloat(a.markNumerator) / Float.parseFloat(a.markDenominator);
-                    unitMark += (mark * value);
+                    subjectMark += (mark * value);
                 }
-                overallMark = Math.round(unitMark);
+                overallMark = Math.round(subjectMark);
                 return overallMark;
             } catch (NumberFormatException e) {
                 e.printStackTrace();
@@ -239,16 +229,14 @@ public class Fragment2 extends Fragment implements DeleteListener, AssessmentDia
             return overallMark;
         }
 
-        // Populates the text view with the Unit mark.
         @Override
         protected void onPostExecute(Integer overallMark) {
             super.onPostExecute(overallMark);
-            String msg = "Subject Mark: " + overallMark;
-            tvUnitMark.setText(msg);
+            String displayedMark = "Subject Mark: " + overallMark;
+            tvSubjectMark.setText(displayedMark);
         }
     }
 
-    // Updates an Assessment's details.
     private class UpdateAssessment extends AsyncTask<Assessment, Assessment, Void> {
         @Override
         protected Void doInBackground(Assessment... assessments) {

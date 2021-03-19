@@ -9,19 +9,22 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.pumpkinsoup.psgetdegrees.assessmentProvider.Assessment;
-import com.pumpkinsoup.psgetdegrees.assessmentProvider.AssessmentViewModel;
+import com.pumpkinsoup.psgetdegrees.AssessmentProvider.Assessment;
+import com.pumpkinsoup.psgetdegrees.AssessmentProvider.AssessmentViewModel;
 
 import java.util.ArrayList;
 
-public class AssessRecyclerAdapter extends RecyclerView.Adapter<AssessRecyclerAdapter.ViewHolder> {
+/**
+ * A Recycler Adapter for the list of assessments (on the second tab - Subject Mark tab).
+ */
+public class AssessmentRecyclerAdapter extends RecyclerView.Adapter<AssessmentRecyclerAdapter.ViewHolder> {
 
     private ArrayList<Assessment> data;
     private AssessmentViewModel aViewModel;
     private DeleteListener deleteListener;
     private EditAssessmentListener editAssessmentListener;
 
-    public AssessRecyclerAdapter(ArrayList<Assessment> data, AssessmentViewModel aViewModel) {
+    public AssessmentRecyclerAdapter(ArrayList<Assessment> data, AssessmentViewModel aViewModel) {
         this.data = data;
         this.aViewModel = aViewModel;
     }
@@ -41,14 +44,14 @@ public class AssessRecyclerAdapter extends RecyclerView.Adapter<AssessRecyclerAd
 
     @NonNull
     @Override
-    public AssessRecyclerAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.assess_card_layout, parent, false);
-        AssessRecyclerAdapter.ViewHolder viewHolder = new AssessRecyclerAdapter.ViewHolder(v);
+    public AssessmentRecyclerAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_assessment, parent, false);
+        AssessmentRecyclerAdapter.ViewHolder viewHolder = new AssessmentRecyclerAdapter.ViewHolder(v);
         return viewHolder;
     }
 
     @Override
-    public void onBindViewHolder(@NonNull AssessRecyclerAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull AssessmentRecyclerAdapter.ViewHolder holder, int position) {
         holder.tvAssessmentName.setText(data.get(position).getAssessmentName());
         holder.tvValue.setText(data.get(position).getValue());
         holder.tvMarkNum.setText(data.get(position).getMarkNumerator());

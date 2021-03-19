@@ -9,7 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="com.pumpkinsoup.psgetdegrees.UnitInfoActivity"></activity>
+        <activity android:name="com.pumpkinsoup.psgetdegrees.SubjectInfoActivity"></activity>
         <activity
             android:name="com.pumpkinsoup.psgetdegrees.WamInfoActivity"
             android:parentActivityName="com.pumpkinsoup.psgetdegrees.MainActivity"></activity>
