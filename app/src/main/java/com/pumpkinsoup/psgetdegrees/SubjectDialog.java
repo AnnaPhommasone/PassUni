@@ -45,7 +45,7 @@ public class SubjectDialog extends AppCompatDialogFragment {
                     listener.addSubject(subjectName, yearLevel, creditPts, mark);
                 });
 
-        etUnitName = view.findViewById(R.id.et_unit_name);
+        etUnitName = view.findViewById(R.id.et_subject_name);
         radioGroup = view.findViewById(R.id.radio_group);
         etCreditPoints = view.findViewById(R.id.et_credit_pts);
         etMark = view.findViewById(R.id.et_mark);

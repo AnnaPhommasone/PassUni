@@ -72,7 +72,7 @@ public class SubjectMarkTabFragment extends Fragment implements DeleteListener, 
         recyclerAdapter = new AssessmentRecyclerAdapter(assessments, assessmentViewModel);
         recyclerAdapter.setDeleteListener(this);
         recyclerAdapter.setEditAssessmentListener(this);
-        recyclerView = view.findViewById(R.id.recycler_view2);
+        recyclerView = view.findViewById(R.id.recycler_view_assessments);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setAdapter(recyclerAdapter);
 
@@ -117,7 +117,7 @@ public class SubjectMarkTabFragment extends Fragment implements DeleteListener, 
 
     @Override
     public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
-        inflater.inflate(R.menu.unit_options_menu, menu);
+        inflater.inflate(R.menu.menu_subject_mark_options, menu);
         super.onCreateOptionsMenu(menu, inflater);
     }
 

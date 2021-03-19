@@ -60,7 +60,7 @@ public class EditSubjectDialog extends AppCompatDialogFragment {
                     listener.editSubject(id, subjectName, yearLevel, creditPoints, mark, pos);
                 });
 
-        etSubjectName = view.findViewById(R.id.et_unit_name);
+        etSubjectName = view.findViewById(R.id.et_subject_name);
         radioGroup = view.findViewById(R.id.radio_group);
         etCreditPoints = view.findViewById(R.id.et_credit_pts);
         etMark = view.findViewById(R.id.et_mark);

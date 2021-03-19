@@ -98,7 +98,7 @@
             android:backgroundTint="#E3E4E4"
             card_view:layout_constraintStart_toStartOf="@+id/ver_gl_3"
             card_view:layout_constraintTop_toBottomOf="@+id/tv_unit_name"
-            card_view:srcCompat="@drawable/ic_delete_black_24dp" />
+            card_view:srcCompat="@drawable/ic_bin" />
 
         <TextView
             android:id="@+id/tv_year_level"
@@ -129,7 +129,7 @@
             android:backgroundTint="#E3E4E4"
             card_view:layout_constraintStart_toEndOf="@+id/btn_del"
             card_view:layout_constraintTop_toBottomOf="@+id/tv_unit_name"
-            card_view:srcCompat="@drawable/ic_mode_edit" />
+            card_view:srcCompat="@drawable/ic_edit" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

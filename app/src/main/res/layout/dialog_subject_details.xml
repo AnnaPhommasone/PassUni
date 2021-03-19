@@ -6,16 +6,16 @@
     android:padding="16dp">
 
     <EditText
-        android:id="@+id/et_unit_name"
+        android:id="@+id/et_subject_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/unit_name_code_optional"/>
+        android:hint="@string/subject_name_code_optional"/>
 
     <TextView
         android:id="@+id/tv_year_level"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/et_unit_name"
+        android:layout_below="@+id/et_subject_name"
         android:layout_alignParentStart="true"
         android:layout_marginTop="0dp"
         android:text="@string/year_level_colon"

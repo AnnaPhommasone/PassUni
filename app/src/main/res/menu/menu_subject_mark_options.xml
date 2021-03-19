@@ -5,7 +5,7 @@
     <item
         android:id="@+id/action_add_assess"
         android:title=""
-        android:icon="@drawable/ic_add_24dp"
+        android:icon="@drawable/ic_plus"
         app:showAsAction="always" />
 
     <item

@@ -70,7 +70,7 @@ public class WamTabFragment extends Fragment implements DeleteListener, SubjectD
         recyclerAdapter = new SubjectRecyclerAdapter(subjects, subjectViewModel);
         recyclerAdapter.setDeleteListener(this);
         recyclerAdapter.setEditUnitListener(this);
-        recyclerView = view.findViewById(R.id.recycler_view);
+        recyclerView = view.findViewById(R.id.recycler_view_subjects);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setAdapter(recyclerAdapter);
 
@@ -115,7 +115,7 @@ public class WamTabFragment extends Fragment implements DeleteListener, SubjectD
 
     @Override
     public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
-        inflater.inflate(R.menu.wam_options_menu, menu);
+        inflater.inflate(R.menu.menu_wam_options, menu);
         super.onCreateOptionsMenu(menu, inflater);
     }
 

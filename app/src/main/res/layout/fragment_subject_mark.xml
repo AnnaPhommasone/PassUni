@@ -7,7 +7,7 @@
     tools:context=".SubjectMarkTabFragment">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycler_view2"
+        android:id="@+id/recycler_view_assessments"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginBottom="55dp"
@@ -32,7 +32,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/ver_gl_1"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/recycler_view2" />
+        app:layout_constraintTop_toBottomOf="@+id/recycler_view_assessments" />
 
     <TextView
         android:id="@+id/tv_unit_mark"
@@ -43,6 +43,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/ver_gl_1"
-        app:layout_constraintTop_toBottomOf="@+id/recycler_view2" />
+        app:layout_constraintTop_toBottomOf="@+id/recycler_view_assessments" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
