@@ -36,7 +36,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/ver_gl_1"
-        app:layout_constraintTop_toBottomOf="@+id/recycler_view_subjects" />
+        app:layout_constraintTop_toBottomOf="@+id/recycler_view_subjects"
+        android:gravity="center"/>
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/ver_gl_1"

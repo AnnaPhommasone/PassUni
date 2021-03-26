@@ -43,6 +43,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/ver_gl_1"
-        app:layout_constraintTop_toBottomOf="@+id/recycler_view_assessments" />
+        app:layout_constraintTop_toBottomOf="@+id/recycler_view_assessments"
+        android:gravity="center"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
