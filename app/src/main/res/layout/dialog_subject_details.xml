@@ -9,7 +9,8 @@
         android:id="@+id/et_subject_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/subject_name_code_optional"/>
+        android:hint="@string/subject_name_code_optional"
+        android:inputType="textCapSentences"/>
 
     <TextView
         android:id="@+id/tv_year_level"

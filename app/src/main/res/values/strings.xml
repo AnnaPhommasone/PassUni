@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">PassUni</string>
+    <string name="app_name">Pass Uni</string>
     <string name="subject_code">Subject Code</string>
     <string name="subject_name">Subject Name</string>
     <string name="calculate_wam">Calculate WAM</string>
