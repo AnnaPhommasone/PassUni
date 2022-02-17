@@ -1,2 +1,2 @@
-rootProject.name='PsGetDegrees'
+rootProject.name='WamCalculator'
 include ':app'

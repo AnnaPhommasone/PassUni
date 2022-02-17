@@ -151,10 +151,10 @@
         <TableLayout
             android:id="@+id/weightings_table"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="125dp"
             android:layout_below="@+id/tv_weightings_title"
+            android:layout_marginTop="10dp"
             android:background="#E3E4E4"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_weightings_title">
@@ -162,6 +162,7 @@
             <TableRow
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -182,6 +183,7 @@
             </TableRow>
 
             <TableRow>
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -191,6 +193,7 @@
                     android:text="@string/first_year_undergraduate"
                     android:textColor="@android:color/black"
                     android:textSize="18sp" />
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -205,6 +208,7 @@
             <TableRow
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -214,6 +218,7 @@
                     android:text="@string/all_other_year_levels"
                     android:textColor="@android:color/black"
                     android:textSize="18sp" />
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

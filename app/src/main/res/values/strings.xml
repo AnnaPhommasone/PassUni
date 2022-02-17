@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Pass Uni</string>
+    <string name="app_name">WAM Calculator</string>
     <string name="subject_code">Subject Code</string>
     <string name="subject_name">Subject Name</string>
     <string name="calculate_wam">Calculate WAM</string>
@@ -24,7 +24,7 @@
     <string name="level_2_plus_unit">Level 2+ Subject</string>
     <string name="credit">Credit:</string>
     <string name="mark_colon">Mark:</string>
-    <string name="year_level_colon">Year Level:</string>
+    <string name="year_level_colon">Level:</string>
     <string name="one">1</string>
     <string name="two_plus">2+</string>
     <string name="slash">/</string>
