@@ -2,7 +2,7 @@
 
 > Calculate your WAM and subject score!
 
-<img src="./images/screenshot.jpg">
+<img src="./images/screenshot.jpg" width="50%">
 
 ## Features
 
