@@ -2,6 +2,8 @@
 
 > Calculate your WAM and subject score!
 
+<img src="./images/screenshot.jpg">
+
 ## Features
 
 - Calculate a weighted average mark based on the subject scores you input
