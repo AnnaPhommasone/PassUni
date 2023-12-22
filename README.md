@@ -4,8 +4,6 @@
 
 <img src="./images/screenshot.jpg" width="30%">
 
-[Check it out here!](https://play.google.com/store/apps/details?id=com.pumpkinsoup.wamcalculator)
-
 ## Features
 
 - Calculate a weighted average mark based on the subject scores you input
